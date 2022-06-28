@@ -6,7 +6,7 @@ import { SideBarContext } from "../context/SidebarStateContext";
 import { app } from "../firebase/firebase-config";
 
 const Home: NextPage = () => {
-	const { isExpanded, invertIsExpanded } = useContext(SideBarContext);
+	const { isExpanded } = useContext(SideBarContext);
 
 	return (
 		<>
