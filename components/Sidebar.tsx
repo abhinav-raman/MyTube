@@ -19,7 +19,7 @@ const Sidebar = () => {
 					onClick={invertIsExpanded}
 				>
 					<svg
-						className={`${isExpanded ? "rotate-180" : ""} transition-all`}
+						className={`${isExpanded ? "rotate-180" : ""}`}
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"

@@ -9,7 +9,7 @@ export const SidebarContextProvider = ({ children }: any) => {
 	const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
 	const sideBarStateHandler = () => {
-		setIsExpanded(!isExpanded);
+		setIsExpanded(prevState => !prevState);
 	};
 
 	return (
