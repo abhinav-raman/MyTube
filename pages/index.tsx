@@ -1,14 +1,37 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
+import { getVideos } from "../firebase/firebase-database";
 
 const Home: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const router = useRouter();
+	const [videosObj, setVideosObj] = useState<any>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const createVideoHandler = () => {};
+	const initialLoad = useRef<boolean>(false);
+
+	const getAllVideos = async () => {
+		setIsLoading(true);
+		const videoResponse = await getVideos();
+		if (videoResponse.exists()) {
+			console.log(videoResponse.val());
+			setVideosObj(videoResponse.val());
+		} else {
+			console.log("No data available");
+		}
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		if (initialLoad.current) return;
+
+		initialLoad.current = true;
+		getAllVideos();
+	});
 
 	return (
 		<>
@@ -33,6 +56,18 @@ const Home: NextPage = () => {
 					>
 						+ Create
 					</button>
+				</div>
+				<div className="p-2 flex flex-wrap">
+					{isLoading && <p>Loading</p>}
+					{!isLoading &&
+						videosObj &&
+						Object.entries(videosObj).map(
+							([id, data]: [id: string, data: any]) => (
+								<div className="w-[calc(25%-1rem)] m-2" key={id}>
+									<VideoTile videoId={id} videoData={data.snippet} />
+								</div>
+							)
+						)}
 				</div>
 			</main>
 

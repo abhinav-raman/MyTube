@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
 import axios from "axios";
 import VideoTile from "../components/VideoFile";
+import { createVideo } from "../firebase/firebase-database";
 
 const Create: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -28,6 +29,16 @@ const Create: NextPage = () => {
 			}
 		} catch (error) {
 			setErrorInVerifyingVideo(true);
+			console.log(error);
+		}
+	};
+
+	const createVideoHandler = async () => {
+		console.log(verifiedVideo);
+		try {
+			const response = await createVideo(verifiedVideo);
+			console.log(response);
+		} catch (error) {
 			console.log(error);
 		}
 	};
@@ -67,6 +78,7 @@ const Create: NextPage = () => {
 						<button
 							className="rounded-md bg-amber-400 px-4 py-2 ml-2"
 							type="submit"
+							onClick={createVideoHandler}
 						>
 							Yes, Confirm
 						</button>
