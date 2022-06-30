@@ -57,7 +57,7 @@ const Home: NextPage = () => {
 						+ Create
 					</button>
 				</div>
-				<div className="p-2 flex flex-wrap">
+				<div className="flex flex-wrap">
 					{isLoading && <p>Loading</p>}
 					{!isLoading &&
 						videosObj &&
