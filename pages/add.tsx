@@ -86,7 +86,7 @@ const Create: NextPage = () => {
 	return (
 		<main
 			className={`h-full p-2 pt-14 flex justify-center items-center transition-all ${
-				isExpanded ? "ml-72" : "ml-12"
+				isExpanded ? "m-64" : "ml-12"
 			}`}
 		>
 			<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">

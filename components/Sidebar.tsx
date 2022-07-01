@@ -13,20 +13,19 @@ const Sidebar = () => {
 	return (
 		<div
 			className={`fixed min-h-screen mt-12 bg-amber-400 transition-all ${
-				isExpanded ? "w-72" : "w-12"
+				isExpanded ? "w-64" : "w-12"
 			}`}
 		>
-			<div className="flex justify-between items-center relative mb-8">
-				{isExpanded && <p>Sidebar</p>}
+			<div className="flex w-full justify-end items-center mb-6">
 				<button
-					className={`w-8 h-8 text-center border-2 border-amber-600 hover:border-amber-200 m-2 rounded`}
+					className={`w-7 h-7 text-center border-2 border-amber-600 hover:border-amber-200 m-2 rounded`}
 					onClick={invertIsExpanded}
 				>
 					<svg
 						className={`${isExpanded ? "rotate-180" : ""}`}
 						xmlns="http://www.w3.org/2000/svg"
-						width="32"
-						height="32"
+						width="24"
+						height="24"
 					>
 						<path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
 					</svg>

@@ -60,7 +60,7 @@ const Signup = () => {
 			</Head>
 			<main
 				className={`pt-12 transition-all h-full flex justify-center items-center ${
-					isExpanded ? "ml-72" : "ml-12"
+					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
 				<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">

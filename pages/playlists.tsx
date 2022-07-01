@@ -45,7 +45,7 @@ const Playlists: NextPage = () => {
 
 			<main
 				className={`h-full p-2 pt-14 transition-all ${
-					isExpanded ? "ml-72" : "ml-12"
+					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
 				<div className="h-8 flex justify-between">
