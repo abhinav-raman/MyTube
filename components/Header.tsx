@@ -9,9 +9,9 @@ const Header = () => {
 	const { isLoggedIn, setIsLoggedIn } = useContext(LoggedInContext);
 
 	const logoutHandler = async () => {
-    try {
-      const response = await logOut();
-      setIsLoggedIn(false);
+		try {
+			const response = await logOut();
+			setIsLoggedIn({ status: false, userId: "" });
 			console.log(response);
 		} catch (error) {
 			console.log("Error in logging out user.", error);

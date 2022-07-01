@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const LoggedInContext = React.createContext({
 	isLoggedIn: false,
-	setIsLoggedIn: (state: boolean) => {},
+	setIsLoggedIn: ({
+		status,
+		userId,
+	}: {
+		status: boolean;
+		userId: string;
+	}) => {},
 });
 
 export const LoggedInContextProvider = ({ children }: any) => {
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+	const localUserId = useRef<string>("");
 
-	const loginStateHandler = (state: boolean) => {
-		setIsLoggedIn(!isLoggedIn);
+	useEffect(() => {
+		localUserId.current = localStorage.getItem("userId") || "";
+	});
+
+	const [userId, setUserId] = useState<string>(localUserId.current);
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+		localUserId ? true : false
+	);
+
+	const loginStateHandler = ({
+		status,
+		userId,
+	}: {
+		status: boolean;
+		userId: string;
+	}) => {
+		setIsLoggedIn(status);
+		setUserId(userId);
+		localStorage.removeItem("userId");
+    
 	};
 
 	return (

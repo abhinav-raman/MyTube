@@ -24,10 +24,12 @@ const Login: NextPage = () => {
 		}, 2000);
 	}, []);
 
-	const signInHandler = async () => {
+	const logInHandler = async () => {
 		try {
 			const response = await logIn(email, password);
-			setIsLoggedIn(true);
+			console.log(response);
+
+			setIsLoggedIn({ userId: response.user.uid, status: true });
 			router.replace("/");
 		} catch (error) {
 			console.log(error);
@@ -36,7 +38,7 @@ const Login: NextPage = () => {
 
 	const submitHandler = (event: any) => {
 		event.preventDefault();
-		signInHandler();
+		logInHandler();
 	};
 
 	return (
