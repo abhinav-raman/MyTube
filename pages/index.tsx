@@ -1,10 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
+import loaderIcon from "../assets/images/loader.svg";
 
 const Home: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -66,12 +68,21 @@ const Home: NextPage = () => {
 					</button>
 				</div>
 				<div className="flex flex-wrap">
-					{isLoading && <p>Loading</p>}
+					{isLoading && (
+						<div className="h-16 w-full">
+							<div className="h-full aspect-square mx-auto">
+								<Image src={loaderIcon} alt="loading" layout="responsive" className="animate-spin-2" />
+							</div>
+						</div>
+					)}
 					{!isLoading &&
 						videosObj &&
 						Object.entries(videosObj).map(
 							([id, data]: [id: string, data: any]) => (
-								<div className="w-[calc(25%-1rem)] m-2 bg-amber-100 rounded-lg" key={id}>
+								<div
+									className="w-[calc(25%-1rem)] m-2 bg-amber-100 rounded-lg"
+									key={id}
+								>
 									<VideoTile videoId={id} videoData={data.snippet} />
 								</div>
 							)

@@ -1,10 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
+import loaderIcon from "../assets/images/loader.svg";
 
 const Playlists: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -63,7 +65,13 @@ const Playlists: NextPage = () => {
 					</button>
 				</div>
 				<div className="flex flex-wrap">
-					{isLoading && <p>Loading</p>}
+        {isLoading && (
+						<div className="h-16 w-full">
+							<div className="h-full aspect-square mx-auto">
+								<Image src={loaderIcon} alt="loading" layout="responsive" className="animate-spin-2" />
+							</div>
+						</div>
+					)}
 					{!isLoading &&
 						videosObj &&
 						Object.entries(videosObj).map(

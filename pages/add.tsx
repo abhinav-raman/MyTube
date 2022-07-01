@@ -75,7 +75,7 @@ const Create: NextPage = () => {
 		>
 			<div className="h-8">
 				<button className="h-full aspect-square" onClick={() => router.back()}>
-					<Image src={backIcon} alt="back" layout="responsive" />
+					<Image src={backIcon} alt="back" layout="responsive" className="hover:-translate-x-1 transition-all" />
 				</button>
 			</div>
 			<div className="h-full pb-16 flex flex-col justify-center items-center">
