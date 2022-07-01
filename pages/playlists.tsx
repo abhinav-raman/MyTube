@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
-import VideoTile from "../components/VideoFile";
+import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
 
@@ -14,7 +14,7 @@ const Playlists: NextPage = () => {
 
 	const initialLoad = useRef<boolean>(false);
 
-	const getAllVideos = async () => {
+	const getAllPlaylists = async () => {
 		setIsLoading(true);
 		const videoResponse = await getPlaylists();
 		if (videoResponse.exists()) {
@@ -30,7 +30,7 @@ const Playlists: NextPage = () => {
 		if (initialLoad.current) return;
 
 		initialLoad.current = true;
-		getAllVideos();
+		getAllPlaylists();
 	});
 
 	return (
@@ -69,7 +69,7 @@ const Playlists: NextPage = () => {
 						Object.entries(videosObj).map(
 							([id, data]: [id: string, data: any]) => (
 								<div className="w-[calc(25%-1rem)] m-2" key={id}>
-									<VideoTile videoId={id} videoData={data.snippet} />
+									<PlaylistTile playlistId={id} playlistData={data.snippet} />
 								</div>
 							)
 						)}

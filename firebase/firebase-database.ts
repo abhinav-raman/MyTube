@@ -9,6 +9,11 @@ export const createVideo = (videoData: any) =>
 		...videoData,
 	});
 
+export const createPlaylist = (playlistData: any) =>
+	set(ref(database, "playlists/" + playlistData.id), {
+		...playlistData,
+	});
+
 export const getVideos = () => get(child(detabaseRef, `videos/`));
 
-export const getPlaylists = () => get(child(detabaseRef, `playlsits/`));
+export const getPlaylists = () => get(child(detabaseRef, `playlists/`));

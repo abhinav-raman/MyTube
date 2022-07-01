@@ -7,7 +7,7 @@ import Router, { useRouter } from "next/router";
 
 import loader from "../assets/images/loader.svg";
 import Image from "next/image";
-import { createVideo } from "../firebase/firebase-database";
+import { createPlaylist, createVideo } from "../firebase/firebase-database";
 
 const FORM_STATES = {
 	INITIAL: "initial",
@@ -34,7 +34,7 @@ const Create: NextPage = () => {
 		event.preventDefault();
 		setIsLoading(true);
 		try {
-			const response = await axios.get(`api/youtube/video?id=${videoUrl}`);
+			const response = await axios.get(`api/youtube/${CONTENT}?id=${videoUrl}`);
 			const { items } = response.data;
 			console.log(response);
 			if (items.length > 0) {
@@ -53,6 +53,23 @@ const Create: NextPage = () => {
 		setIsLoading(true);
 		try {
 			const response = await createVideo(verifiedVideo);
+			setIsVideoCreated(true);
+			console.log(response);
+			// setTimeout(() => {
+			// 	console.log(verifiedVideo);
+			// 	setIsVideoCreated(true);
+			// 	setIsLoading(false);
+			// }, 1000);
+		} catch (error) {
+			console.log(error);
+		}
+		setIsLoading(false);
+	};
+
+	const addPlaylistHandler = async () => {
+		setIsLoading(true);
+		try {
+			const response = await createPlaylist(verifiedVideo);
 			setIsVideoCreated(true);
 			console.log(response);
 			// setTimeout(() => {
@@ -114,7 +131,13 @@ const Create: NextPage = () => {
 							<button
 								className="rounded-md bg-amber-400 px-4 py-2 ml-2 relative"
 								type="submit"
-								onClick={() => (isLoading ? null : createVideoHandler())}
+								onClick={() =>
+									isLoading
+										? null
+										: CONTENT === "video"
+										? createVideoHandler()
+										: addPlaylistHandler()
+								}
 							>
 								{isLoading ? (
 									<div className="relative h-6 w-12">
