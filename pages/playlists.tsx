@@ -48,7 +48,7 @@ const Playlists: NextPage = () => {
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
-				<div className="h-8 flex justify-between mb-4">
+				<div className="h-8 flex justify-between mb-4 mx-2">
 					<h2 className="text-2xl font-bold">Playlists</h2>
 					<button
 						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"

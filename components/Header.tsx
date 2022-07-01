@@ -19,16 +19,16 @@ const Header = () => {
 	};
 
 	return (
-		<header className="fixed flex justify-center w-full h-16 bg-amber-400 border-b-2 border-b-amber-600">
-			<h1 className="text-4xl font-bold cursor-pointer my-[9px]">
+		<header className="fixed flex justify-center w-full h-16 bg-indigo-200">
+			<h1 className="text-4xl font-bold cursor-pointer my-[9px] text-indigo-800">
 				<Link href="/">
 					<a>Mytube</a>
 				</Link>
 			</h1>
-			<div className="h-max absolute right-2 my-4">
+			<div className="h-max absolute right-4 my-4">
 				{!isLoggedIn ? (
 					<button
-						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"
+						className="h-8 px-2 rounded-md bg-indigo-600 hover:bg-indigo-600/75 text-white shadow-lg shadow-indigo-400"
 						onClick={() => router.push("/login")}
 					>
 						Login

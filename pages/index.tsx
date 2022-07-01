@@ -48,10 +48,10 @@ const Home: NextPage = () => {
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
-				<div className="h-8 flex justify-between mb-4">
-					<h2 className="text-2xl font-bold">Videos</h2>
+				<div className="h-8 flex justify-between mb-4 mx-2">
+					<h2 className="text-2xl font-bold text-yellow-800">Videos</h2>
 					<button
-						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"
+						className="h-8 px-2 rounded-md bg-yellow-600 hover:bg-yellow-600/75 text-white shadow-lg shadow-yellow-400/75"
 						onClick={() =>
 							router.push(
 								{
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 						videosObj &&
 						Object.entries(videosObj).map(
 							([id, data]: [id: string, data: any]) => (
-								<div className="w-[calc(25%-1rem)] m-2" key={id}>
+								<div className="w-[calc(25%-1rem)] m-2 bg-amber-100 rounded-lg" key={id}>
 									<VideoTile videoId={id} videoData={data.snippet} />
 								</div>
 							)
