@@ -12,17 +12,15 @@ export const LoggedInContext = React.createContext({
 });
 
 export const LoggedInContextProvider = ({ children }: any) => {
-	const localUserId = useRef<string>("");
+	const [userId, setUserId] = useState<string>("");
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
 	useEffect(() => {
-		localUserId.current = localStorage.getItem("userId") || "";
-	});
-
-	const [userId, setUserId] = useState<string>(localUserId.current);
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
-		localUserId ? true : false
-	);
-
+		const localUserId = localStorage.getItem("userId") || "";
+		setUserId(localUserId);
+		setIsLoggedIn(localUserId.length > 0 ? true : false);
+	}, []);
+  
 	const loginStateHandler = ({
 		status,
 		userId,
@@ -32,8 +30,7 @@ export const LoggedInContextProvider = ({ children }: any) => {
 	}) => {
 		setIsLoggedIn(status);
 		setUserId(userId);
-		localStorage.removeItem("userId");
-    
+		localStorage.setItem("userId", userId);
 	};
 
 	return (
