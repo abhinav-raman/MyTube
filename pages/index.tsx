@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Youtube | Home</title>
+				<title>MyTube | Home</title>
 				<meta
 					name="description"
 					content="Youtube app using firebase and NextJS"
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
 						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"
 						onClick={() => router.push("/create")}
 					>
-						+ Create
+						+ Add Video
 					</button>
 				</div>
 				<div className="flex flex-wrap">

@@ -51,6 +51,7 @@ const Create: NextPage = () => {
 		setIsLoading(true);
 		try {
 			const response = await createVideo(verifiedVideo);
+			setIsVideoCreated(true);
 			console.log(response);
 			// setTimeout(() => {
 			// 	console.log(verifiedVideo);
@@ -70,7 +71,9 @@ const Create: NextPage = () => {
 			}`}
 		>
 			<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
-				<h2 className="w-full text-center mb-2 text-xl">Create Video</h2>
+				<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
+					{isVideoCreated ? "Video is added" : "Add Video"}
+				</h2>
 
 				{!isVideoCreated &&
 					verifiedVideo !== null &&
@@ -82,7 +85,9 @@ const Create: NextPage = () => {
 									videoData={verifiedVideo.snippet}
 								/>
 							</div>
-							<p className="my-2">Is this the video you&apos;re looking for?</p>
+							<p className="my-2 text-indigo-400 font-bold text-lg">
+								Is this the video you&apos;re trying to add?
+							</p>
 						</>
 					)}
 
@@ -141,7 +146,14 @@ const Create: NextPage = () => {
 					</>
 				)}
 
-				{isVideoCreated && <p>Your video has been added successfully.</p>}
+				{isVideoCreated && (
+					<>
+						<h4 className="font-medium">
+							Your video has been added successfully.
+						</h4>
+						{/* <p>Redirecting</p> */}
+					</>
+				)}
 			</section>
 		</main>
 	);

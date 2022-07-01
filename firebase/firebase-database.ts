@@ -9,5 +9,6 @@ export const createVideo = (videoData: any) =>
 		...videoData,
 	});
 
-export const getVideos = () =>
-	get(child(detabaseRef, `videos/`));
+export const getVideos = () => get(child(detabaseRef, `videos/`));
+
+export const getPlaylists = () => get(child(detabaseRef, `playlsits/`));
