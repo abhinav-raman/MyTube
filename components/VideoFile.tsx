@@ -22,7 +22,7 @@ const VideoTile = ({
 			rel="noreferrer"
 			href={`${YOUTUBE_VIDEO_WATCH_URL}${videoId}`}
 		>
-			<div className="border b-slate-600 relative">
+			<div className="border b-slate-600 relative transition-all hover:scale-105">
 				<Image
 					src={medium.url}
 					alt=""

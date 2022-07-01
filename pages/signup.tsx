@@ -59,7 +59,7 @@ const Signup = () => {
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main
-				className={`pt-12 transition-all h-full flex justify-center items-center ${
+				className={`pt-[4.5rem] transition-all h-full flex justify-center items-center ${
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>

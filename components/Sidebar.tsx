@@ -12,7 +12,7 @@ const Sidebar = () => {
 	const { isExpanded, invertIsExpanded } = useContext(SideBarContext);
 	return (
 		<div
-			className={`fixed min-h-screen mt-12 bg-amber-400 transition-all ${
+			className={`fixed min-h-screen mt-16 bg-amber-400 transition-all ${
 				isExpanded ? "w-64" : "w-12"
 			}`}
 		>

@@ -5,7 +5,7 @@ import { SideBarContext } from "../context/SidebarStateContext";
 const Account: NextPage = () => {
   const { isExpanded } = useContext(SideBarContext);
 	return (
-		<main className={`pt-12 transition-all ${isExpanded ? "ml-64" : "ml-12"}`}>
+		<main className={`pt-[4.5rem] transition-all ${isExpanded ? "ml-64" : "ml-12"}`}>
 			Account
 		</main>
 	);

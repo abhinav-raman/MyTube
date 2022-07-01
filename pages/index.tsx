@@ -44,11 +44,11 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main
-				className={`h-full p-2 pt-14 transition-all ${
+				className={`h-full p-2 pt-[4.5rem] transition-all ${
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
-				<div className="h-8 flex justify-between">
+				<div className="h-8 flex justify-between mb-4">
 					<h2 className="text-2xl font-bold">Videos</h2>
 					<button
 						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"

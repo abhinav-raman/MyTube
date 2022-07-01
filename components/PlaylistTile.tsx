@@ -27,9 +27,8 @@ const PlaylistTile = ({
 				rel="noreferrer"
 				href={`${YOUTUBE_PLAYLIST_URL}${playlistId}`}
 			>
-				<div className="border b-slate-600 relative">
+				<div className="border b-slate-600 relative transition-all hover:scale-105">
 					<Image
-						className="transition-all hover:scale-105"
 						src={medium.url}
 						alt=""
 						loader={loader}
