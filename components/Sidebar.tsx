@@ -35,7 +35,10 @@ const Sidebar = () => {
 			<ul>
 				<li>
 					<Link href="/">
-						<a className="flex p-2 hover:bg-amber-200 cursor-pointer">
+						<a
+							title="Videos"
+							className="flex p-2 hover:bg-amber-200 cursor-pointer"
+						>
 							<div className="h-8 w-8 p-1">
 								<Image src={videoIcon} layout="responsive" alt="video" />
 							</div>
@@ -45,7 +48,10 @@ const Sidebar = () => {
 				</li>
 				<li>
 					<Link href="/playlists">
-						<a className="flex p-2 hover:bg-amber-200 cursor-pointer">
+						<a
+							title="Playlists"
+							className="flex p-2 hover:bg-amber-200 cursor-pointer"
+						>
 							<div className="h-8 w-8 p-1">
 								<Image src={playlistIcon} layout="responsive" alt="video" />
 							</div>
@@ -55,7 +61,10 @@ const Sidebar = () => {
 				</li>
 				<li>
 					<Link href="/account">
-						<a className="flex p-2 hover:bg-amber-200 cursor-pointer">
+						<a
+							title="Account"
+							className="flex p-2 hover:bg-amber-200 cursor-pointer"
+						>
 							<div className="h-8 w-8 p-1">
 								<Image src={accountIcon} layout="responsive" alt="video" />
 							</div>

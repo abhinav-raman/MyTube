@@ -52,7 +52,15 @@ const Home: NextPage = () => {
 					<h2 className="text-2xl font-bold">Videos</h2>
 					<button
 						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"
-						onClick={() => router.push("/add")}
+						onClick={() =>
+							router.push(
+								{
+									pathname: "/add",
+									query: { content: "video" },
+								},
+								{ pathname: "add-video" }
+							)
+						}
 					>
 						+ Add Video
 					</button>

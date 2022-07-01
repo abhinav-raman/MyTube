@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { useContext, useState } from "react";
-import { SideBarContext } from "../context/SidebarStateContext";
 import axios from "axios";
+import { SideBarContext } from "../context/SidebarStateContext";
 import VideoTile from "../components/VideoFile";
+import Router, { useRouter } from "next/router";
 
 import loader from "../assets/images/loader.svg";
 import Image from "next/image";
@@ -20,11 +21,12 @@ const Create: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const [videoUrl, setVideoUrl] = useState<string>("");
 	const [verifiedVideo, setVerifiedVideo] = useState<any>(null);
-	// const [currentFormState, setCurrentFormState] = useState<string>(FORM_STATES.INITIAL);
 	const [errorInVerifyingVideo, setErrorInVerifyingVideo] =
 		useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isVideoCreated, setIsVideoCreated] = useState<boolean>(false);
+
+	const CONTENT = useRouter().query.content;
 
 	const verifyHandler = async (event: any) => {
 		if (videoUrl.length === 0) return;
@@ -72,7 +74,10 @@ const Create: NextPage = () => {
 		>
 			<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
 				<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
-					{isVideoCreated ? "Video is added" : "Add Video"}
+					{CONTENT === "video" &&
+						(isVideoCreated ? "Video is added" : "Add Video")}
+					{CONTENT === "playlist" &&
+						(isVideoCreated ? "Playlist is added" : "Add Playlist")}
 				</h2>
 
 				{!isVideoCreated &&
@@ -131,7 +136,7 @@ const Create: NextPage = () => {
 					<>
 						<input
 							className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-amber-400 p-2"
-							placeholder="Video link"
+							placeholder={`${CONTENT === "video" ? "Video" : "Playlist"} link`}
 							type="url"
 							value={videoUrl}
 							onChange={({ target }) => setVideoUrl(target.value)}
