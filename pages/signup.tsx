@@ -1,34 +1,38 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { LoggedInContext } from "../context/LoggedInContext";
+import { useContext, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
-import { logIn } from "../firebase/firebase-auth";
+import { signUp } from "../firebase/firebase-auth";
 
-const Login: NextPage = () => {
-	const router = useRouter();
-	let { message } = router.query;
-
+const Signup = () => {
 	const { isExpanded } = useContext(SideBarContext);
-	const { isLoggedIn, setIsLoggedIn } = useContext(LoggedInContext);
+
+	const router = useRouter();
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	const [showMessage, setShowMessage] = useState(true);
-
-	useEffect(() => {
-		setTimeout(() => {
-			setShowMessage(false);
-		}, 2000);
-	}, []);
+	const [retypedPassword, setRetypedPassword] = useState("");
+	const [errorInForm, setErrorInForm] = useState({
+		status: false,
+		message: "",
+	});
 
 	const signInHandler = async () => {
 		try {
-			const response = await logIn(email, password);
-			setIsLoggedIn(true);
-			router.replace("/");
+			const response = await signUp(email, password);
+			console.log(response);
+			router.replace(
+				{
+					pathname: "/login",
+					query: {
+						message:
+							"User created successfully. Please login with credentials.",
+					},
+				},
+				{
+					pathname: "/login",
+				}
+			);
 		} catch (error) {
 			console.log(error);
 		}
@@ -36,13 +40,22 @@ const Login: NextPage = () => {
 
 	const submitHandler = (event: any) => {
 		event.preventDefault();
+
+		if (password !== retypedPassword) {
+			setErrorInForm({
+				status: true,
+				message: "Entered passwords do not match.",
+			});
+			return;
+		}
+
 		signInHandler();
 	};
 
 	return (
 		<>
 			<Head>
-				<title>Youtube | Login</title>
+				<title>Youtube | Signup</title>
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main
@@ -53,12 +66,8 @@ const Login: NextPage = () => {
 				<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
 					<form onSubmit={submitHandler}>
 						<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
-							Login
+							Sign Up
 						</h2>
-						{showMessage && message?.length && (
-							<p className="my-2 font-medium text-green-500">{message}</p>
-						)}
-						{}
 						<input
 							name="email"
 							className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-amber-400 p-2"
@@ -73,7 +82,21 @@ const Login: NextPage = () => {
 							placeholder="Password"
 							type="password"
 							value={password}
-							onChange={({ target }) => setPassword(target.value)}
+							onChange={({ target }) => {
+								setPassword(target.value);
+								setErrorInForm({ status: false, message: "" });
+							}}
+						/>
+						<input
+							name="password"
+							className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-amber-400 p-2"
+							placeholder="Retype Password"
+							type="password"
+							value={retypedPassword}
+							onChange={({ target }) => {
+								setRetypedPassword(target.value);
+								setErrorInForm({ status: false, message: "" });
+							}}
 						/>
 						<button
 							className="rounded-md bg-amber-400 px-4 py-2"
@@ -83,13 +106,16 @@ const Login: NextPage = () => {
 							Submit
 						</button>
 					</form>
+					{errorInForm.status && (
+						<p className="text-red-600 mt-4">{errorInForm.message}</p>
+					)}
 					<p>
-						Not a user?{" "}
+						Already a user?{" "}
 						<span
 							className="w-full cursor-pointer text-blue-500"
-							onClick={() => router.replace("/signup")}
+							onClick={() => router.replace("/login")}
 						>
-							Sign up
+							Log in
 						</span>
 					</p>
 				</section>
@@ -98,4 +124,4 @@ const Login: NextPage = () => {
 	);
 };
 
-export default Login;
+export default Signup;
