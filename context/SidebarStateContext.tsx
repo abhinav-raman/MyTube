@@ -10,7 +10,6 @@ export const SidebarContextProvider = ({ children }: any) => {
   
 	useEffect(() => {
     const localSidebarState = localStorage.getItem("sideBarState") || "";
-		console.log(localSidebarState);
     setIsExpanded(localSidebarState === "1" ? true : false);
 	}, []);
 

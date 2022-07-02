@@ -26,21 +26,12 @@ const Header = () => {
 				</Link>
 			</h1>
 			<div className="h-max absolute right-4 my-4">
-				{!isLoggedIn ? (
-					<button
-						className="h-8 px-2 rounded-md bg-indigo-600 hover:bg-indigo-600/75 text-white shadow-lg shadow-indigo-400"
-						onClick={() => router.push("/login")}
-					>
-						Login
-					</button>
-				) : (
-					<button
-						className="h-8 px-2 rounded-md border-2 border-amber-600 hover:border-amber-200"
-						onClick={logoutHandler}
-					>
-						Logout
-					</button>
-				)}
+				<button
+					className="h-8 px-2 rounded-md bg-indigo-600 hover:bg-indigo-600/75 text-white shadow-lg shadow-indigo-400"
+					onClick={() => (isLoggedIn ? logoutHandler() : router.push("/login"))}
+				>
+					{isLoggedIn ? "Logout" : "Login"}
+				</button>
 			</div>
 		</header>
 	);

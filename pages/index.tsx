@@ -20,7 +20,6 @@ const Home: NextPage = () => {
 		setIsLoading(true);
 		const videoResponse = await getVideos();
 		if (videoResponse.exists()) {
-			console.log(videoResponse.val());
 			setVideosObj(videoResponse.val());
 		} else {
 			console.log("No data available");

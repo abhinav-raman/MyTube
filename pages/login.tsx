@@ -26,6 +26,12 @@ const Login: NextPage = () => {
 		}, 2000);
 	}, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace("/");
+    }
+  }, [isLoggedIn, router]);
+
 	const logInHandler = async () => {
 		try {
 			const response = await logIn(email, password);

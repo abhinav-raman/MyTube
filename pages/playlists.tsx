@@ -20,7 +20,6 @@ const Playlists: NextPage = () => {
 		setIsLoading(true);
 		const videoResponse = await getPlaylists();
 		if (videoResponse.exists()) {
-			console.log(videoResponse.val());
 			setVideosObj(videoResponse.val());
 		} else {
 			console.log("No data available");
