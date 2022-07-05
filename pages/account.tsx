@@ -27,18 +27,24 @@ const Account: NextPage = () => {
 				<h2 className="text-2xl font-bold text-yellow-800">Account</h2>
 			</div>
 			{currentUser && (
-				<section className="flex">
-					<div className="relative h-32 aspect-square">
-						<Image
-							src={currentUser.photoURL || ""}
-							alt="profile"
-							layout="fill"
-							className="absolute rounded-full"
-						/>
-					</div>
-					<div className="ml-4">
-						<h2 className="text-2xl font-bold text-yellow-600 mb-2">{currentUser.displayName}</h2>
-						<h4 className="text-xl font-semibold text-yellow-600/75">{currentUser.email}</h4>
+				<section>
+					<div className="w-full">
+						<div className="relative h-32 aspect-square m-auto">
+							<Image
+								src={currentUser.photoURL || ""}
+								alt="profile"
+								layout="fill"
+								className="absolute rounded-full"
+							/>
+						</div>
+						<div className="w-full">
+							<h2 className="text-2xl text-center font-bold text-yellow-600 mb-2">
+								{currentUser.displayName}
+							</h2>
+							<h4 className="text-xl text-center font-semibold text-yellow-600/75">
+								{currentUser.email}
+							</h4>
+						</div>
 					</div>
 				</section>
 			)}
