@@ -116,7 +116,7 @@ const Signup = () => {
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
 					<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
-						<form onSubmit={submitHandler}>
+						{/* <form onSubmit={submitHandler}>
 							<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
 								Sign Up
 							</h2>
@@ -160,8 +160,8 @@ const Signup = () => {
 						</form>
 						{errorInForm.status && (
 							<p className="text-red-600 mt-4">{errorInForm.message}</p>
-						)}
-						<p className="w-full h-8 text-slate-600 py-4">or</p>
+						)} */}
+						{/* <p className="w-full h-8 text-slate-600 py-4">or</p> */}
 						<button
 							className="flex rounded-md border bg-white border-slate-400 p-1 h-10 m-auto my-4"
 							onClick={googleSignInHandler}

@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { LoggedInContext } from "../context/LoggedInContext";
 import { SideBarContext } from "../context/SidebarStateContext";
-import { logIn } from "../firebase/firebase-auth";
+import { getGoogleRedirectResult, googleSignIn, logIn } from "../firebase/firebase-auth";
 import backIcon from "../assets/images/back-arrow.svg";
+import googleIcon from "../assets/images/google-logo.svg";
+import loaderIcon from "../assets/images/loader.svg";
 
 const Login: NextPage = () => {
 	const router = useRouter();
@@ -16,7 +18,10 @@ const Login: NextPage = () => {
 	const { isLoggedIn, setIsLoggedIn } = useContext(LoggedInContext);
 
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [password, setPassword] = useState("");	
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
 	const [showMessage, setShowMessage] = useState(true);
 
@@ -26,11 +31,31 @@ const Login: NextPage = () => {
 		}, 2000);
 	}, []);
 
+  const googleSignInHandler = async () => {
+		const response = await googleSignIn();
+		console.log(response);
+	};
+
   useEffect(() => {
     if (isLoggedIn) {
       router.replace("/");
     }
-  }, [isLoggedIn, router]);
+
+    setIsLoading(true);
+		getGoogleRedirectResult()
+			.then((result) => {
+				if (result) {
+					const { user } = result;
+					setIsLoggedIn({ userId: user.uid, status: true });
+					router.replace("/");
+				}
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				throw new Error(error.message);
+			});
+  }, [isLoggedIn, router, setIsLoggedIn]);
 
 	const logInHandler = async () => {
 		try {
@@ -70,7 +95,7 @@ const Login: NextPage = () => {
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
 					<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
-						<form onSubmit={submitHandler}>
+						{/* <form onSubmit={submitHandler}>
 							<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
 								Login
 							</h2>
@@ -101,7 +126,35 @@ const Login: NextPage = () => {
 							>
 								Submit
 							</button>
-						</form>
+						</form> */}
+            <button
+							className="flex rounded-md border bg-white border-slate-400 p-1 h-10 m-auto my-4"
+							onClick={googleSignInHandler}
+						>
+							<div className="h-6 aspect-square m-auto mx-2">
+								<Image
+									src={googleIcon}
+									alt="google-icon"
+									layout="fixed"
+									height="24"
+									width="24"
+								/>
+							</div>
+							{isLoading ? (
+								<div className="h-6 w-full">
+									<div className="h-full aspect-square m-auto">
+										<Image
+											src={loaderIcon}
+											alt="loading"
+											layout="responsive"
+											className="animate-spin-2"
+										/>
+									</div>
+								</div>
+							) : (
+								<p className="m-auto mx-2">Login with Google</p>
+							)}
+						</button>
 						<p>
 							Not a user?{" "}
 							<span
