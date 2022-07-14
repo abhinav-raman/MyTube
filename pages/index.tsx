@@ -7,31 +7,43 @@ import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
 import loaderIcon from "../assets/images/loader.svg";
+import axios from "axios";
 
 const Home: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const router = useRouter();
-	const [videosObj, setVideosObj] = useState<any>(null);
+	const [videoResponseList, setVideoResponseList] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const initialLoad = useRef<boolean>(false);
 
-	const getAllVideos = async () => {
+	const fetchVideoData = async (videoId: string) => {
+		const response = await axios.get(
+			`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.API_KEY}`
+		);
+		console.log("response", response.data.items);
+		setVideoResponseList((prevData) => [...prevData, ...response.data.items]);
+		setIsLoading(false);
+	};
+
+	const getAllVideosFromFirebase = async () => {
 		setIsLoading(true);
 		const videoResponse = await getVideos();
 		if (videoResponse.exists()) {
-			setVideosObj(videoResponse.val());
+			const videoResponseData: any = videoResponse.val();
+			for (const videoObj in videoResponseData) {
+				fetchVideoData(videoObj);
+			}
 		} else {
 			console.log("No data available");
 		}
-		setIsLoading(false);
 	};
 
 	useEffect(() => {
 		if (initialLoad.current) return;
 
 		initialLoad.current = true;
-		getAllVideos();
+		getAllVideosFromFirebase();
 	});
 
 	return (
@@ -70,22 +82,28 @@ const Home: NextPage = () => {
 					{isLoading && (
 						<div className="h-16 w-full">
 							<div className="h-full aspect-square mx-auto">
-								<Image src={loaderIcon} alt="loading" layout="responsive" className="animate-spin-2" />
+								<Image
+									src={loaderIcon}
+									alt="loading"
+									layout="responsive"
+									className="animate-spin-2"
+								/>
 							</div>
 						</div>
 					)}
 					{!isLoading &&
-						videosObj &&
-						Object.entries(videosObj).map(
-							([id, data]: [id: string, data: any]) => (
-								<div
-									className="w-[calc(25%-1rem)] m-2 bg-amber-100 rounded-lg"
-									key={id}
-								>
-									<VideoTile videoId={id} videoData={data.snippet} />
-								</div>
-							)
-						)}
+						videoResponseList &&
+						videoResponseList.map((videoData: any) => (
+							<div
+								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] m-2 bg-amber-100 rounded-lg"
+								key={videoData.id}
+							>
+								<VideoTile
+									videoId={videoData.id}
+									videoData={videoData.snippet}
+								/>
+							</div>
+						))}
 				</div>
 			</main>
 

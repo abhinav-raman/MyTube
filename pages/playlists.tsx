@@ -7,31 +7,46 @@ import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
 import loaderIcon from "../assets/images/loader.svg";
+import axios from "axios";
 
 const Playlists: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const router = useRouter();
-	const [videosObj, setVideosObj] = useState<any>(null);
+	const [playlistResponseList, setPlaylistResponseList] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const initialLoad = useRef<boolean>(false);
 
-	const getAllPlaylists = async () => {
+	const fetchPlaylistData = async (videoId: string) => {
+		const response = await axios.get(
+			`https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${videoId}&key=${process.env.API_KEY}`
+		);
+		console.log("response", response.data.items);
+		setPlaylistResponseList((prevData: any) => [
+			...prevData,
+			...response.data.items,
+		]);
+    setIsLoading(false);
+	};
+
+	const getAllPlaylistsFromFirebase = async () => {
 		setIsLoading(true);
 		const videoResponse = await getPlaylists();
 		if (videoResponse.exists()) {
-			setVideosObj(videoResponse.val());
+			const videoResponseData: any = videoResponse.val();
+			for (const videoObj in videoResponseData) {
+				fetchPlaylistData(videoObj);
+			}
 		} else {
 			console.log("No data available");
 		}
-		setIsLoading(false);
 	};
 
 	useEffect(() => {
 		if (initialLoad.current) return;
 
 		initialLoad.current = true;
-		getAllPlaylists();
+		getAllPlaylistsFromFirebase();
 	});
 
 	return (
@@ -64,22 +79,31 @@ const Playlists: NextPage = () => {
 					</button>
 				</div>
 				<div className="flex flex-wrap">
-        {isLoading && (
+					{isLoading && (
 						<div className="h-16 w-full">
 							<div className="h-full aspect-square mx-auto">
-								<Image src={loaderIcon} alt="loading" layout="responsive" className="animate-spin-2" />
+								<Image
+									src={loaderIcon}
+									alt="loading"
+									layout="responsive"
+									className="animate-spin-2"
+								/>
 							</div>
 						</div>
 					)}
 					{!isLoading &&
-						videosObj &&
-						Object.entries(videosObj).map(
-							([id, data]: [id: string, data: any]) => (
-								<div className="w-[calc(25%-1rem)] m-2 bg-amber-100 rounded-lg" key={id}>
-									<PlaylistTile playlistId={id} playlistData={data.snippet} />
-								</div>
-							)
-						)}
+						playlistResponseList.length &&
+						playlistResponseList.map((playlistData: any) => (
+							<div
+								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] m-2 bg-amber-100 rounded-lg"
+								key={playlistData.id}
+							>
+								<PlaylistTile
+									playlistId={playlistData.id}
+									playlistData={playlistData.snippet}
+								/>
+							</div>
+						))}
 				</div>
 			</main>
 

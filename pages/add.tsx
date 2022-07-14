@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { SideBarContext } from "../context/SidebarStateContext";
 import VideoTile from "../components/VideoFile";
@@ -8,19 +8,31 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import loader from "../assets/images/loader.svg";
 import backIcon from "../assets/images/back-arrow.svg";
-import { createPlaylist, createVideo } from "../firebase/firebase-database";
+import { ADD_VIDEO_TYPE, createPlaylist, createVideo } from "../firebase/firebase-database";
+import { currentSignedInUser } from "../firebase/firebase-auth";
+import type { User } from "firebase/auth";
 
 const Create: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const [videoUrl, setVideoUrl] = useState<string>("");
-	const [verifiedVideo, setVerifiedVideo] = useState<any>(null);
+	const [verifiedContent, setVerifiedContent] = useState<any>(null);
 	const [errorInVerifyingVideo, setErrorInVerifyingVideo] =
 		useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isVideoCreated, setIsVideoCreated] = useState<boolean>(false);
+	const [currentUser, setCurrentUser] = useState<User | null>(null);
+
 
 	const router = useRouter();
 	const CONTENT = router.query.content;
+
+  useEffect(() => {
+		currentSignedInUser((user: User) => {
+			console.log(user);
+
+			setCurrentUser(user);
+		});
+	}, []);
 
 	const verifyHandler = async (event: any) => {
 		if (videoUrl.length === 0) return;
@@ -32,7 +44,7 @@ const Create: NextPage = () => {
 			const { items } = response.data;
 			console.log(response);
 			if (items.length > 0) {
-				setVerifiedVideo(response.data.items[0]);
+				setVerifiedContent(response.data.items[0]);
 			} else {
 				setErrorInVerifyingVideo(true);
 			}
@@ -46,7 +58,16 @@ const Create: NextPage = () => {
 	const createVideoHandler = async () => {
 		setIsLoading(true);
 		try {
-			const response = await createVideo(verifiedVideo);
+      const payload: ADD_VIDEO_TYPE = {
+        id: verifiedContent.id,
+        title: verifiedContent.snippet.title,
+        dataAdded: new Date().toISOString(),
+        addedBy: {
+          email: currentUser && currentUser.email,
+          uid: currentUser && currentUser.uid 
+        }
+      }
+			const response = await createVideo(payload);
 			setIsVideoCreated(true);
 			console.log(response);
 		} catch (error) {
@@ -58,7 +79,16 @@ const Create: NextPage = () => {
 	const addPlaylistHandler = async () => {
 		setIsLoading(true);
 		try {
-			const response = await createPlaylist(verifiedVideo);
+      const payload: ADD_VIDEO_TYPE = {
+        id: verifiedContent.id,
+        title: verifiedContent.snippet.title,
+        dataAdded: new Date().toISOString(),
+        addedBy: {
+          email: currentUser && currentUser.email,
+          uid: currentUser && currentUser.uid 
+        }
+      }
+			const response = await createPlaylist(payload);
 			setIsVideoCreated(true);
 			console.log(response);
 		} catch (error) {
@@ -88,13 +118,13 @@ const Create: NextPage = () => {
 					</h2>
 
 					{!isVideoCreated &&
-						verifiedVideo !== null &&
+						verifiedContent !== null &&
 						errorInVerifyingVideo === false && (
 							<>
 								<div className="border-2 border-amber-400 mb-2 p-2 rounded-md">
 									<VideoTile
-										videoId={verifiedVideo.id}
-										videoData={verifiedVideo.snippet}
+										videoId={verifiedContent.id}
+										videoData={verifiedContent.snippet}
 									/>
 								</div>
 								<p className="my-2 text-indigo-400 font-bold text-lg">
@@ -108,13 +138,13 @@ const Create: NextPage = () => {
 					)}
 
 					{!isVideoCreated &&
-						verifiedVideo !== null &&
+						verifiedContent !== null &&
 						errorInVerifyingVideo === false && (
 							<div className="w-full flex justify-center">
 								<button
 									className="rounded-md bg-amber-400 px-4 py-2"
 									type="submit"
-									onClick={() => (isLoading ? null : setVerifiedVideo(null))}
+									onClick={() => (isLoading ? null : setVerifiedContent(null))}
 								>
 									No
 								</button>
@@ -145,7 +175,7 @@ const Create: NextPage = () => {
 							</div>
 						)}
 
-					{!isVideoCreated && verifiedVideo === null && (
+					{!isVideoCreated && verifiedContent === null && (
 						<>
 							<input
 								className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-amber-400 p-2"
