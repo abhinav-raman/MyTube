@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 		setIsLoading(false);
 	};
 
-	const getAllVideosFromFirebase = async () => {
+	const getAllVideosFromFirebase = useCallback(async () => {
 		setIsLoading(true);
 		const videoResponse = await getVideos();
 		if (videoResponse.exists()) {
@@ -37,14 +37,14 @@ const Home: NextPage = () => {
 		} else {
 			console.log("No data available");
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		if (initialLoad.current) return;
 
 		initialLoad.current = true;
 		getAllVideosFromFirebase();
-	});
+	}, [getAllVideosFromFirebase]);
 
 	return (
 		<>
