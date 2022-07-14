@@ -66,13 +66,10 @@ const Home: NextPage = () => {
 					<button
 						className="h-8 px-2 rounded-md bg-yellow-600 hover:bg-yellow-600/75 text-white shadow-lg shadow-yellow-400/75"
 						onClick={() =>
-							router.push(
-								{
-									pathname: "/add",
-									query: { content: "video" },
-								},
-								{ pathname: "add-video" }
-							)
+							router.push({
+								pathname: "/add",
+								query: { content: "video" },
+							})
 						}
 					>
 						+ Add Video
@@ -95,7 +92,7 @@ const Home: NextPage = () => {
 						videoResponseList &&
 						videoResponseList.map((videoData: any) => (
 							<div
-								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] m-2 bg-amber-100 rounded-lg"
+								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] w-[calc(100%-1rem)] m-2 bg-amber-100 rounded-lg"
 								key={videoData.id}
 							>
 								<VideoTile

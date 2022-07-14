@@ -26,7 +26,7 @@ const Playlists: NextPage = () => {
 			...prevData,
 			...response.data.items,
 		]);
-    setIsLoading(false);
+		setIsLoading(false);
 	};
 
 	const getAllPlaylistsFromFirebase = async () => {
@@ -69,10 +69,7 @@ const Playlists: NextPage = () => {
 					<button
 						className="h-8 px-2 rounded-md bg-yellow-600 hover:bg-yellow-600/75 text-white shadow-lg shadow-yellow-400/75"
 						onClick={() =>
-							router.push(
-								{ pathname: "add/", query: { content: "playlist" } },
-								{ pathname: "add-playlist" }
-							)
+							router.push({ pathname: "add/", query: { content: "playlist" } })
 						}
 					>
 						+ Add Playlist

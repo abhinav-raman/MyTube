@@ -19,7 +19,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="fixed flex justify-center w-full h-16 bg-indigo-200">
+		<header className="fixed flex justify-center w-full h-16 bg-indigo-200 z-10">
 			<h1 className="text-4xl font-bold cursor-pointer my-[9px] text-indigo-800">
 				<Link href="/">
 					<a>Mytube</a>
