@@ -1,6 +1,7 @@
 import type { User } from "firebase/auth";
 import type { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { currentSignedInUser } from "../firebase/firebase-auth";
@@ -8,14 +9,18 @@ import { currentSignedInUser } from "../firebase/firebase-auth";
 const Account: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const router = useRouter();
 
 	useEffect(() => {
 		currentSignedInUser((user: User) => {
 			console.log(user);
 
+      if (!user) {
+        router.replace("/login");
+      }
 			setCurrentUser(user);
 		});
-	}, []);
+	}, [router]);
 
 	return (
 		<main
