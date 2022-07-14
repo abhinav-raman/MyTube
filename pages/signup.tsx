@@ -93,7 +93,7 @@ const Signup = () => {
 	return (
 		<>
 			<Head>
-				<title>Youtube | Signup</title>
+				<title>MyTube | Signup</title>
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main

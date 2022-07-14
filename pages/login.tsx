@@ -77,7 +77,7 @@ const Login: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Youtube | Login</title>
+				<title>MyTube | Login</title>
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main
