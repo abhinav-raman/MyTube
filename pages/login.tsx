@@ -13,6 +13,7 @@ import {
 import BackIcon from "../assets/images/back-arrow.svg";
 import GoogleIcon from "../assets/images/google-logo.svg";
 import LoaderIcon from "../assets/images/loader.svg";
+import Loader from "../components/Loader";
 
 const Login: NextPage = () => {
 	const router = useRouter();
@@ -146,15 +147,7 @@ const Login: NextPage = () => {
 								/>
 							</div>
 							{isLoading ? (
-								<div className="h-6 w-full">
-									<div className="h-full aspect-square m-auto">
-										<LoaderIcon
-											alt="loading"
-											layout="responsive"
-											className="animate-spin-2"
-										/>
-									</div>
-								</div>
+								<Loader />
 							) : (
 								<p className="m-auto mx-2">Login with Google</p>
 							)}

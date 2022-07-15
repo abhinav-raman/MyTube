@@ -8,6 +8,7 @@ import LoaderIcon from "../assets/images/loader.svg";
 import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
+import Loader from "../components/Loader";
 
 const Home: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
 		const response = await axios.get(
 			`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.API_KEY}`
 		);
-    console.log(response.data.items[0]);
+		console.log(response.data.items[0]);
 		setVideoResponseList((prevData) => [...prevData, ...response.data.items]);
 		setIsLoading(false);
 	};
@@ -62,7 +63,9 @@ const Home: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Videos</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+						Videos
+					</h2>
 					<button
 						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
 						onClick={() =>
@@ -77,27 +80,16 @@ const Home: NextPage = () => {
 				</div>
 				<div className="flex flex-wrap">
 					{isLoading && (
-						<div className="h-16 w-full">
-							<div className="h-full aspect-square mx-auto">
-								<LoaderIcon
-									alt="loading"
-									className="animate-spin-2"
-								/>
-							</div>
-						</div>
+						<Loader />
 					)}
 					{!isLoading &&
 						videoResponseList &&
 						videoResponseList.map((videoData: any) => (
-							<div
-								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] w-[calc(100%-1rem)] m-2 bg-amber-100 rounded-lg"
+							<VideoTile
 								key={videoData.id}
-							>
-								<VideoTile
-									videoId={videoData.id}
-									videoData={videoData.snippet}
-								/>
-							</div>
+								videoId={videoData.id}
+								videoData={videoData.snippet}
+							/>
 						))}
 				</div>
 			</main>

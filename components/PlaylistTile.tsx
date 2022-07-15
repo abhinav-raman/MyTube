@@ -20,24 +20,24 @@ const PlaylistTile = ({
 	};
 
 	return (
-		<>
+		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] m-2 rounded-lg">
 			<a
 				className="cursor-pointer"
 				target="_blank"
 				rel="noreferrer"
 				href={`${YOUTUBE_PLAYLIST_URL}${playlistId}`}
 			>
-				<div className="border b-slate-600 relative transition-all hover:scale-105">
+				<div className="relative transition-all hover:scale-105">
 					<Image
 						src={medium.url}
 						alt=""
 						height={medium.height}
 						width={medium.width}
-            layout="responsive"
-            className="rounded-t-lg border-0"
+						layout="responsive"
+						className="rounded-t-lg border-0"
 					/>
 					<div className="absolute h-8 w-full bottom-0 bg-black/[0.4] ">
-            <p className="w-full text-center text-white my-1">Open Playlist</p>
+						<p className="w-full text-center text-white my-1">Open Playlist</p>
 					</div>
 				</div>
 				<h4 className="font-bold line-clamp-2 p-2" title={playlistData.title}>
@@ -49,9 +49,11 @@ const PlaylistTile = ({
 				target="_blank"
 				rel="noreferrer"
 			>
-				<p title={playlistData.channelTitle} className="p-2">{playlistData.channelTitle}</p>
+				<p title={playlistData.channelTitle} className="p-2">
+					{playlistData.channelTitle}
+				</p>
 			</a>
-		</>
+		</div>
 	);
 };
 

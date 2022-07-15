@@ -6,6 +6,7 @@ import Image from "next/image";
 // import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
+import Loader from "../components/Loader";
 import PlaylistTile from "../components/PlaylistTile";
 import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
@@ -110,7 +111,7 @@ const Account: NextPage = () => {
 									src={currentUser.photoURL || ""}
 									alt="profile"
 									className="absolute rounded-full"
-                  layout="fill"
+									layout="fill"
 								/>
 							</div>
 							<div className="w-full">
@@ -129,18 +130,15 @@ const Account: NextPage = () => {
 						Your Videos
 					</h2>
 					<div className="flex flex-wrap">
+						{isLoading && <Loader />}
 						{!isLoading &&
 							videoResponseList &&
 							videoResponseList.map((videoData: any) => (
-								<div
-									className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] w-[calc(100%-1rem)] m-2 bg-amber-100 rounded-lg"
+								<VideoTile
 									key={videoData.id}
-								>
-									<VideoTile
-										videoId={videoData.id}
-										videoData={videoData.snippet}
-									/>
-								</div>
+									videoId={videoData.id}
+									videoData={videoData.snippet}
+								/>
 							))}
 					</div>
 				</div>
@@ -149,18 +147,15 @@ const Account: NextPage = () => {
 						Your Playlists
 					</h2>
 					<div className="flex flex-wrap">
+						{isLoading && <Loader />}
 						{!isLoading &&
 							playlistResponseList &&
 							playlistResponseList.map((videoData: any) => (
-								<div
-									className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] w-[calc(100%-1rem)] m-2 bg-amber-100 rounded-lg"
+								<PlaylistTile
 									key={videoData.id}
-								>
-									<PlaylistTile
-										playlistId={videoData.id}
-										playlistData={videoData.snippet}
-									/>
-								</div>
+									playlistId={videoData.id}
+									playlistData={videoData.snippet}
+								/>
 							))}
 					</div>
 				</div>

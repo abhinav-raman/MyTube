@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
 
-// import Image from "next/image";
 import Link from "next/link";
 import RightArrowIcon from "../assets/images/right-arrow.svg";
 import VideoIcon from "../assets/images/video.svg";
@@ -34,17 +33,17 @@ const Sidebar = () => {
 					<Link href="/">
 						<a
 							title="Videos"
-							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+							className={`flex p-2  shadow-sky-800/20 cursor-pointer rounded-r-lg ${
 								router.asPath === "/"
-									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
-									: ""
-							}`}
+									? "bg-sky-200/50 dark:bg-sky-800/50 shadow-2xl"
+									: "hover:bg-slate-200 hover:dark:bg-gray-700"
+							} `}
 						>
 							<div className="h-8 w-8 p-1">
 								<VideoIcon
 									layout="responsive"
 									alt="video"
-									className="fill-sky-800 dark:fill-sky-200"
+									className="fill-sky-900 dark:fill-sky-200"
 								/>
 							</div>
 							{isExpanded && (
@@ -59,17 +58,17 @@ const Sidebar = () => {
 					<Link href="/playlists">
 						<a
 							title="Playlists"
-							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+							className={`flex p-2 shadow-sky-800/20 cursor-pointer rounded-r-lg ${
 								router.asPath === "/playlists"
-									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
-									: ""
+									? "bg-sky-200/50 dark:bg-sky-800/50 shadow-2xl"
+									: "hover:bg-slate-200 hover:dark:bg-gray-700"
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
 								<PlaylistIcon
 									layout="responsive"
 									alt="video"
-									className="fill-sky-800 dark:fill-sky-200"
+									className="fill-sky-900 dark:fill-sky-200"
 								/>
 							</div>
 							{isExpanded && (
@@ -84,17 +83,17 @@ const Sidebar = () => {
 					<Link href="/account">
 						<a
 							title="Account"
-							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+							className={`flex p-2 shadow-sky-800/20 cursor-pointer rounded-r-lg ${
 								router.asPath === "/account"
-									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
-									: ""
+									? "bg-sky-200/50 dark:bg-sky-800/50 shadow-2xl"
+									: "hover:bg-slate-200 hover:dark:bg-gray-700"
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
 								<AccountIcon
 									layout="responsive"
 									alt="video"
-									className="fill-sky-800 dark:fill-sky-200"
+									className="fill-sky-900 dark:fill-sky-200"
 								/>
 							</div>
 							{isExpanded && (

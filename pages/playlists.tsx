@@ -7,6 +7,7 @@ import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
 import LoaderIcon from "../assets/images/loader.svg";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Playlists: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -77,25 +78,15 @@ const Playlists: NextPage = () => {
 					</button>
 				</div>
 				<div className="flex flex-wrap">
-					{isLoading && (
-						<div className="h-16 w-full">
-							<div className="h-full aspect-square mx-auto">
-								<LoaderIcon alt="loading" className="animate-spin-2" />
-							</div>
-						</div>
-					)}
+					{isLoading && <Loader />}
 					{!isLoading &&
 						playlistResponseList.length &&
 						playlistResponseList.map((playlistData: any) => (
-							<div
-								className="xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] m-2 bg-amber-100 rounded-lg"
+							<PlaylistTile
 								key={playlistData.id}
-							>
-								<PlaylistTile
-									playlistId={playlistData.id}
-									playlistData={playlistData.snippet}
-								/>
-							</div>
+								playlistId={playlistData.id}
+								playlistData={playlistData.snippet}
+							/>
 						))}
 				</div>
 			</main>
