@@ -33,6 +33,7 @@ const PlaylistTile = ({
 						alt=""
 						height={medium.height}
 						width={medium.width}
+            layout="responsive"
             className="rounded-t-lg border-0"
 					/>
 					<div className="absolute h-8 w-full bottom-0 bg-black/[0.4] ">

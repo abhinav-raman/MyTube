@@ -30,6 +30,7 @@ const VideoTile = ({
 						alt=""
 						height={medium.height}
 						width={medium.width}
+            layout="responsive"
 						className="rounded-t-lg border-0"
 					/>
 				</div>
