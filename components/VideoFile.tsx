@@ -44,7 +44,7 @@ const VideoTile = ({
 				target="_blank"
 				rel="noreferrer"
 			>
-				<p title={videoData.channelTitle} className="p-2 font-normal">
+				<p title={videoData.channelTitle} className="p-2 dark:text-gray-300">
 					{videoData.channelTitle}
 				</p>
 			</a>

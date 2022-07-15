@@ -49,7 +49,7 @@ const PlaylistTile = ({
 				target="_blank"
 				rel="noreferrer"
 			>
-				<p title={playlistData.channelTitle} className="p-2">
+				<p title={playlistData.channelTitle} className="p-2 dark:text-gray-300">
 					{playlistData.channelTitle}
 				</p>
 			</a>
