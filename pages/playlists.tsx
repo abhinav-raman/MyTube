@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
-import loaderIcon from "../assets/images/loader.svg";
+import LoaderIcon from "../assets/images/loader.svg";
 import axios from "axios";
 
 const Playlists: NextPage = () => {
@@ -65,7 +64,9 @@ const Playlists: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Playlists</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+						Playlists
+					</h2>
 					<button
 						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
 						onClick={() =>
@@ -79,12 +80,7 @@ const Playlists: NextPage = () => {
 					{isLoading && (
 						<div className="h-16 w-full">
 							<div className="h-full aspect-square mx-auto">
-								<Image
-									src={loaderIcon}
-									alt="loading"
-									layout="responsive"
-									className="animate-spin-2"
-								/>
+								<LoaderIcon alt="loading" className="animate-spin-2" />
 							</div>
 						</div>
 					)}

@@ -5,9 +5,8 @@ import { LoggedInContext } from "../context/LoggedInContext";
 import { logOut } from "../firebase/firebase-auth";
 import { ThemeContext, THEMES } from "../context/ThemeContext";
 
-import darkThemeIcon from "../assets/images/dark-theme-icon.svg";
-import lightThemeIcon from "../assets/images/light-theme-icon.svg";
-import Image from "next/image";
+import DarkThemeIcon from "../assets/images/dark-theme-icon.svg";
+import LightThemeIcon from "../assets/images/light-theme-icon.svg";
 
 const Header = () => {
 	const router = useRouter();
@@ -40,22 +39,13 @@ const Header = () => {
 			<div className="h-max absolute right-4 my-4 flex">
 				<button onClick={toggleThemeHandler} className="h-8 w-8 p-1 mr-2">
 					{themeContext.currentTheme === THEMES.DARK ? (
-						<Image
-							src={lightThemeIcon}
-							alt="light-theme-icon"
-							layout="responsive"
-						/>
+						<LightThemeIcon className="text-white" />
 					) : (
-						<Image
-							src={darkThemeIcon}
-							alt="dark-theme-icon"
-							layout="responsive"
-              className="text-sky-200"
-						/>
+						<DarkThemeIcon className="text-sky-800" />
 					)}
 				</button>
 				<button
-					className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg dark:hover:bg-sky-600/75"
+					className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
 					onClick={() => (isLoggedIn ? logoutHandler() : router.push("/login"))}
 				>
 					{isLoggedIn ? "Logout" : "Login"}

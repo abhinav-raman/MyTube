@@ -1,14 +1,18 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { LoggedInContext } from "../context/LoggedInContext";
 import { SideBarContext } from "../context/SidebarStateContext";
-import { getGoogleRedirectResult, googleSignIn, logIn } from "../firebase/firebase-auth";
-import backIcon from "../assets/images/back-arrow.svg";
-import googleIcon from "../assets/images/google-logo.svg";
-import loaderIcon from "../assets/images/loader.svg";
+import {
+	getGoogleRedirectResult,
+	googleSignIn,
+	logIn,
+} from "../firebase/firebase-auth";
+import BackIcon from "../assets/images/back-arrow.svg";
+import GoogleIcon from "../assets/images/google-logo.svg";
+import LoaderIcon from "../assets/images/loader.svg";
 
 const Login: NextPage = () => {
 	const router = useRouter();
@@ -18,10 +22,8 @@ const Login: NextPage = () => {
 	const { isLoggedIn, setIsLoggedIn } = useContext(LoggedInContext);
 
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");	
-  const [isLoading, setIsLoading] = useState(false);
-
-
+	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [showMessage, setShowMessage] = useState(true);
 
@@ -31,17 +33,17 @@ const Login: NextPage = () => {
 		}, 2000);
 	}, []);
 
-  const googleSignInHandler = async () => {
+	const googleSignInHandler = async () => {
 		const response = await googleSignIn();
 		console.log(response);
 	};
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.replace("/");
-    }
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.replace("/");
+		}
 
-    setIsLoading(true);
+		setIsLoading(true);
 		getGoogleRedirectResult()
 			.then((result) => {
 				if (result) {
@@ -55,7 +57,7 @@ const Login: NextPage = () => {
 				setIsLoading(false);
 				throw new Error(error.message);
 			});
-  }, [isLoggedIn, router, setIsLoggedIn]);
+	}, [isLoggedIn, router, setIsLoggedIn]);
 
 	const logInHandler = async () => {
 		try {
@@ -81,7 +83,7 @@ const Login: NextPage = () => {
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main
-				className={`h-full flex flex-col pt-[4.5rem] p-2 transition-all ${
+				className={`h-screen flex flex-col pt-[4.5rem] p-2 transition-all ${
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
@@ -90,7 +92,11 @@ const Login: NextPage = () => {
 						className="h-full aspect-square"
 						onClick={() => router.back()}
 					>
-						<Image src={backIcon} alt="back" layout="responsive" className="hover:-translate-x-1 transition-all" />
+						<BackIcon
+							alt="back"
+							layout="responsive"
+							className="hover:-translate-x-1 transition-all"
+						/>
 					</button>
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
@@ -127,13 +133,12 @@ const Login: NextPage = () => {
 								Submit
 							</button>
 						</form> */}
-            <button
+						<button
 							className="flex rounded-md border bg-white border-slate-400 p-1 h-10 m-auto my-4"
 							onClick={googleSignInHandler}
 						>
 							<div className="h-6 aspect-square m-auto mx-2">
-								<Image
-									src={googleIcon}
+								<GoogleIcon
 									alt="google-icon"
 									layout="fixed"
 									height="24"
@@ -143,8 +148,7 @@ const Login: NextPage = () => {
 							{isLoading ? (
 								<div className="h-6 w-full">
 									<div className="h-full aspect-square m-auto">
-										<Image
-											src={loaderIcon}
+										<LoaderIcon
 											alt="loading"
 											layout="responsive"
 											className="animate-spin-2"

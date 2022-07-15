@@ -28,14 +28,15 @@ const VideoTile = ({
 					<Image
 						src={medium.url}
 						alt=""
-						loader={loader}
-						layout="responsive"
 						height={medium.height}
 						width={medium.width}
 						className="rounded-t-lg border-0"
 					/>
 				</div>
-				<h4 className="font-bold line-clamp-2 px-2 py-1" title={videoData.title}>
+				<h4
+					className="font-bold line-clamp-2 px-2 py-1"
+					title={videoData.title}
+				>
 					{videoData.title}
 				</h4>
 			</a>
@@ -44,7 +45,9 @@ const VideoTile = ({
 				target="_blank"
 				rel="noreferrer"
 			>
-				<p title={videoData.channelTitle} className="p-2">{videoData.channelTitle}</p>
+				<p title={videoData.channelTitle} className="p-2">
+					{videoData.channelTitle}
+				</p>
 			</a>
 		</>
 	);

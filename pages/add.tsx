@@ -5,10 +5,14 @@ import { SideBarContext } from "../context/SidebarStateContext";
 import VideoTile from "../components/VideoFile";
 import { useRouter } from "next/router";
 
-import Image from "next/image";
-import loader from "../assets/images/loader.svg";
-import backIcon from "../assets/images/back-arrow.svg";
-import { ADD_VIDEO_TYPE, createPlaylist, createVideo } from "../firebase/firebase-database";
+// import Image from "next/image";
+import LoaderIcon from "../assets/images/loader.svg";
+import BackIcon from "../assets/images/back-arrow.svg";
+import {
+	ADD_VIDEO_TYPE,
+	createPlaylist,
+	createVideo,
+} from "../firebase/firebase-database";
 import { currentSignedInUser } from "../firebase/firebase-auth";
 import type { User } from "firebase/auth";
 
@@ -22,11 +26,10 @@ const Create: NextPage = () => {
 	const [isVideoCreated, setIsVideoCreated] = useState<boolean>(false);
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-
 	const router = useRouter();
 	const CONTENT = router.query.content;
 
-  useEffect(() => {
+	useEffect(() => {
 		currentSignedInUser((user: User) => {
 			console.log(user);
 
@@ -58,15 +61,15 @@ const Create: NextPage = () => {
 	const createVideoHandler = async () => {
 		setIsLoading(true);
 		try {
-      const payload: ADD_VIDEO_TYPE = {
-        id: verifiedContent.id,
-        title: verifiedContent.snippet.title,
-        dataAdded: new Date().toISOString(),
-        addedBy: {
-          email: currentUser && currentUser.email,
-          uid: currentUser && currentUser.uid 
-        }
-      }
+			const payload: ADD_VIDEO_TYPE = {
+				id: verifiedContent.id,
+				title: verifiedContent.snippet.title,
+				dataAdded: new Date().toISOString(),
+				addedBy: {
+					email: currentUser && currentUser.email,
+					uid: currentUser && currentUser.uid,
+				},
+			};
 			const response = await createVideo(payload);
 			setIsVideoCreated(true);
 			console.log(response);
@@ -79,15 +82,15 @@ const Create: NextPage = () => {
 	const addPlaylistHandler = async () => {
 		setIsLoading(true);
 		try {
-      const payload: ADD_VIDEO_TYPE = {
-        id: verifiedContent.id,
-        title: verifiedContent.snippet.title,
-        dataAdded: new Date().toISOString(),
-        addedBy: {
-          email: currentUser && currentUser.email,
-          uid: currentUser && currentUser.uid 
-        }
-      }
+			const payload: ADD_VIDEO_TYPE = {
+				id: verifiedContent.id,
+				title: verifiedContent.snippet.title,
+				dataAdded: new Date().toISOString(),
+				addedBy: {
+					email: currentUser && currentUser.email,
+					uid: currentUser && currentUser.uid,
+				},
+			};
 			const response = await createPlaylist(payload);
 			setIsVideoCreated(true);
 			console.log(response);
@@ -99,13 +102,16 @@ const Create: NextPage = () => {
 
 	return (
 		<main
-			className={`h-full p-2 pt-[4.5rem] flex flex-col transition-all ${
+			className={`h-screen p-2 pt-[4.5rem] flex flex-col transition-all ${
 				isExpanded ? "ml-64" : "ml-12"
 			}`}
 		>
 			<div className="h-8">
 				<button className="h-full aspect-square" onClick={() => router.back()}>
-					<Image src={backIcon} alt="back" layout="responsive" className="hover:-translate-x-1 transition-all" />
+					<BackIcon
+						alt="back"
+						className="hover:-translate-x-1 transition-all"
+					/>
 				</button>
 			</div>
 			<div className="h-full pb-16 flex flex-col justify-center items-center">
@@ -161,9 +167,8 @@ const Create: NextPage = () => {
 								>
 									{isLoading ? (
 										<div className="relative h-6 w-12">
-											<Image
+											<LoaderIcon
 												className="animate-spin-2"
-												src={loader}
 												layout="fill"
 												alt="loader"
 											/>

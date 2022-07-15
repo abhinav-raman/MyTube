@@ -31,8 +31,6 @@ const PlaylistTile = ({
 					<Image
 						src={medium.url}
 						alt=""
-						loader={loader}
-						layout="responsive"
 						height={medium.height}
 						width={medium.width}
             className="rounded-t-lg border-0"

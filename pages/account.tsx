@@ -3,6 +3,7 @@ import type { User } from "firebase/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import PlaylistTile from "../components/PlaylistTile";
@@ -78,6 +79,7 @@ const Account: NextPage = () => {
 
 			if (!user) {
 				router.replace("/login");
+				return;
 			}
 			getUserVideos(user.uid);
 			getUserPlaylists(user.uid);
@@ -96,7 +98,9 @@ const Account: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Account</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+						Account
+					</h2>
 				</div>
 				{currentUser && (
 					<section>
@@ -105,8 +109,8 @@ const Account: NextPage = () => {
 								<Image
 									src={currentUser.photoURL || ""}
 									alt="profile"
-									layout="fill"
 									className="absolute rounded-full"
+                  layout="fill"
 								/>
 							</div>
 							<div className="w-full">
@@ -121,7 +125,9 @@ const Account: NextPage = () => {
 					</section>
 				)}
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Your Videos</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+						Your Videos
+					</h2>
 					<div className="flex flex-wrap">
 						{!isLoading &&
 							videoResponseList &&
@@ -139,7 +145,9 @@ const Account: NextPage = () => {
 					</div>
 				</div>
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Your Playlists</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+						Your Playlists
+					</h2>
 					<div className="flex flex-wrap">
 						{!isLoading &&
 							playlistResponseList &&

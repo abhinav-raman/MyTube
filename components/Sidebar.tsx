@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
 
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
-import rightArrowIcon from "../assets/images/right-arrow.svg";
-import videoIcon from "../assets/images/video.svg";
-import playlistIcon from "../assets/images/playlist.svg";
-import accountIcon from "../assets/images/account.svg";
+import RightArrowIcon from "../assets/images/right-arrow.svg";
+import VideoIcon from "../assets/images/video.svg";
+import PlaylistIcon from "../assets/images/playlist.svg";
+import AccountIcon from "../assets/images/account.svg";
 import { useRouter } from "next/router";
 
 const Sidebar = () => {
@@ -24,11 +24,8 @@ const Sidebar = () => {
              m-2 p-1 rounded-md shadow-lg`}
 					onClick={invertIsExpanded}
 				>
-					<Image
-						className={`${isExpanded ? "rotate-180" : ""}`}
-						src={rightArrowIcon}
-						alt="arrow"
-						layout="responsive"
+					<RightArrowIcon
+						className={`fill-white ${isExpanded ? "rotate-90" : "-rotate-90"}`}
 					/>
 				</button>
 			</div>
@@ -44,11 +41,10 @@ const Sidebar = () => {
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
-								<Image
-									src={videoIcon}
+								<VideoIcon
 									layout="responsive"
 									alt="video"
-									className="fill-sky-200"
+									className="fill-sky-800 dark:fill-sky-200"
 								/>
 							</div>
 							{isExpanded && (
@@ -70,7 +66,11 @@ const Sidebar = () => {
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
-								<Image src={playlistIcon} layout="responsive" alt="video" />
+								<PlaylistIcon
+									layout="responsive"
+									alt="video"
+									className="fill-sky-800 dark:fill-sky-200"
+								/>
 							</div>
 							{isExpanded && (
 								<p className="ml-2 text-lg font-medium text-sky-800 dark:text-white">
@@ -91,7 +91,11 @@ const Sidebar = () => {
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
-								<Image src={accountIcon} layout="responsive" alt="video" />
+								<AccountIcon
+									layout="responsive"
+									alt="video"
+									className="fill-sky-800 dark:fill-sky-200"
+								/>
 							</div>
 							{isExpanded && (
 								<p className="ml-2 text-lg font-medium text-sky-800 dark:text-white">

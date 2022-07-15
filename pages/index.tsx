@@ -1,11 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-import loaderIcon from "../assets/images/loader.svg";
+import LoaderIcon from "../assets/images/loader.svg";
 import VideoTile from "../components/VideoFile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
@@ -80,10 +79,8 @@ const Home: NextPage = () => {
 					{isLoading && (
 						<div className="h-16 w-full">
 							<div className="h-full aspect-square mx-auto">
-								<Image
-									src={loaderIcon}
+								<LoaderIcon
 									alt="loading"
-									layout="responsive"
 									className="animate-spin-2"
 								/>
 							</div>
