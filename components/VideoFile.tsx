@@ -35,7 +35,7 @@ const VideoTile = ({
 						className="rounded-t-lg border-0"
 					/>
 				</div>
-				<h4 className="font-bold line-clamp-2 p-2" title={videoData.title}>
+				<h4 className="font-bold line-clamp-2 px-2 py-1" title={videoData.title}>
 					{videoData.title}
 				</h4>
 			</a>

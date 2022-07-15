@@ -96,7 +96,7 @@ const Account: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-yellow-800">Account</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Account</h2>
 				</div>
 				{currentUser && (
 					<section>
@@ -110,10 +110,10 @@ const Account: NextPage = () => {
 								/>
 							</div>
 							<div className="w-full">
-								<h2 className="text-2xl text-center font-bold text-yellow-600 mb-2">
+								<h2 className="text-2xl text-center font-bold text-sky-600 dark:text-white mb-2">
 									{currentUser.displayName}
 								</h2>
-								<h4 className="text-xl text-center font-semibold text-yellow-600/75">
+								<h4 className="text-xl text-center font-semibold text-sky-600/75 dark:text-white/75">
 									{currentUser.email}
 								</h4>
 							</div>
@@ -121,7 +121,7 @@ const Account: NextPage = () => {
 					</section>
 				)}
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-yellow-800">Your Videos</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Your Videos</h2>
 					<div className="flex flex-wrap">
 						{!isLoading &&
 							videoResponseList &&
@@ -139,7 +139,7 @@ const Account: NextPage = () => {
 					</div>
 				</div>
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-yellow-800">Your Playlists</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Your Playlists</h2>
 					<div className="flex flex-wrap">
 						{!isLoading &&
 							playlistResponseList &&

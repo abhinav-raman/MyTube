@@ -3,9 +3,15 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { LoggedInContext } from "../context/LoggedInContext";
 import { logOut } from "../firebase/firebase-auth";
+import { ThemeContext, THEMES } from "../context/ThemeContext";
+
+import darkThemeIcon from "../assets/images/dark-theme-icon.svg";
+import lightThemeIcon from "../assets/images/light-theme-icon.svg";
+import Image from "next/image";
 
 const Header = () => {
 	const router = useRouter();
+	const themeContext = useContext(ThemeContext);
 	const { isLoggedIn, setIsLoggedIn } = useContext(LoggedInContext);
 
 	const logoutHandler = async () => {
@@ -18,16 +24,38 @@ const Header = () => {
 		}
 	};
 
+	const toggleThemeHandler = () => {
+		themeContext.setCurrentTheme(
+			themeContext.currentTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK
+		);
+	};
+
 	return (
-		<header className="fixed flex justify-center w-full h-16 bg-indigo-200 z-10">
-			<h1 className="text-4xl font-bold cursor-pointer my-[9px] text-indigo-800">
+		<header className="fixed flex justify-center w-full h-16 bg-sky-200 dark:bg-sky-900 z-10">
+			<h1 className="text-4xl font-bold cursor-pointer my-[9px] text-sky-900 dark:text-white">
 				<Link href="/">
 					<a>Mytube</a>
 				</Link>
 			</h1>
-			<div className="h-max absolute right-4 my-4">
+			<div className="h-max absolute right-4 my-4 flex">
+				<button onClick={toggleThemeHandler} className="h-8 w-8 p-1 mr-2">
+					{themeContext.currentTheme === THEMES.DARK ? (
+						<Image
+							src={lightThemeIcon}
+							alt="light-theme-icon"
+							layout="responsive"
+						/>
+					) : (
+						<Image
+							src={darkThemeIcon}
+							alt="dark-theme-icon"
+							layout="responsive"
+              className="text-sky-200"
+						/>
+					)}
+				</button>
 				<button
-					className="h-8 px-2 rounded-md bg-indigo-600 hover:bg-indigo-600/75 text-white shadow-lg shadow-indigo-400"
+					className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg dark:hover:bg-sky-600/75"
 					onClick={() => (isLoggedIn ? logoutHandler() : router.push("/login"))}
 				>
 					{isLoggedIn ? "Logout" : "Login"}

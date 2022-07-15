@@ -14,13 +14,14 @@ const Sidebar = () => {
 	const { isExpanded, invertIsExpanded } = useContext(SideBarContext);
 	return (
 		<div
-			className={`fixed min-h-screen mt-16 transition-all ${
+			className={`fixed min-h-screen mt-16 transition-all  ${
 				isExpanded ? "w-64" : "w-12"
 			}`}
 		>
 			<div className="flex w-full justify-end items-center mb-6">
 				<button
-					className={`w-7 h-7 text-center bg-indigo-200 hover:bg-indigo-200/75 m-2 p-1 rounded-md shadow-lg shadow-indigo-300/20`}
+					className={`w-7 h-7 text-center bg-sky-600 hover:bg-sky-600/75
+             m-2 p-1 rounded-md shadow-lg`}
 					onClick={invertIsExpanded}
 				>
 					<Image
@@ -36,8 +37,10 @@ const Sidebar = () => {
 					<Link href="/">
 						<a
 							title="Videos"
-							className={`flex p-2 hover:bg-indigo-200 hover:shadow-lg shadow-indigo-200/20 cursor-pointer rounded-r-lg ${
-								router.asPath === "/" ? "bg-indigo-200 shadow-lg" : ""
+							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+								router.asPath === "/"
+									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
+									: ""
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
@@ -45,11 +48,11 @@ const Sidebar = () => {
 									src={videoIcon}
 									layout="responsive"
 									alt="video"
-									className="fill-indigo-200"
+									className="fill-sky-200"
 								/>
 							</div>
 							{isExpanded && (
-								<p className="ml-2 text-lg font-medium text-indigo-800">
+								<p className="ml-2 text-lg font-medium text-sky-800 dark:text-white">
 									Videos
 								</p>
 							)}
@@ -60,15 +63,17 @@ const Sidebar = () => {
 					<Link href="/playlists">
 						<a
 							title="Playlists"
-							className={`flex p-2 hover:bg-indigo-200 hover:shadow-lg shadow-indigo-200/20 cursor-pointer rounded-r-lg ${
-								router.asPath === "/playlists" ? "bg-indigo-200 shadow-lg" : ""
+							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+								router.asPath === "/playlists"
+									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
+									: ""
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
 								<Image src={playlistIcon} layout="responsive" alt="video" />
 							</div>
 							{isExpanded && (
-								<p className="ml-2 text-lg font-medium text-indigo-800">
+								<p className="ml-2 text-lg font-medium text-sky-800 dark:text-white">
 									Playlists
 								</p>
 							)}
@@ -79,15 +84,17 @@ const Sidebar = () => {
 					<Link href="/account">
 						<a
 							title="Account"
-							className={`flex p-2 hover:bg-indigo-200 hover:shadow-lg shadow-indigo-200/20 cursor-pointer rounded-r-lg ${
-								router.asPath === "/account" ? "bg-indigo-200 shadow-lg" : ""
+							className={`flex p-2 hover:bg-sky-200/80 hover:dark:bg-sky-800/80 hover:shadow-lg shadow-sky-800/20 cursor-pointer rounded-r-lg ${
+								router.asPath === "/account"
+									? "bg-sky-200 dark:bg-sky-800 shadow-2xl"
+									: ""
 							}`}
 						>
 							<div className="h-8 w-8 p-1">
 								<Image src={accountIcon} layout="responsive" alt="video" />
 							</div>
 							{isExpanded && (
-								<p className="ml-2 text-lg font-medium text-indigo-800">
+								<p className="ml-2 text-lg font-medium text-sky-800 dark:text-white">
 									Account
 								</p>
 							)}

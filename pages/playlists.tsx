@@ -65,9 +65,9 @@ const Playlists: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-yellow-800">Playlists</h2>
+					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">Playlists</h2>
 					<button
-						className="h-8 px-2 rounded-md bg-yellow-600 hover:bg-yellow-600/75 text-white shadow-lg shadow-yellow-400/75"
+						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
 						onClick={() =>
 							router.push({ pathname: "add/", query: { content: "playlist" } })
 						}
