@@ -1,7 +1,8 @@
+import { useContext, useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+
 import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
@@ -65,7 +66,7 @@ const Playlists: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+					<h2 className="text-2xl font-bold text-black dark:text-white">
 						Playlists
 					</h2>
 					<PrimaryButton
@@ -75,25 +76,21 @@ const Playlists: NextPage = () => {
 					>
 						+ Add Playlist
 					</PrimaryButton>
-					{/* <button
-						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
-						onClick={() =>
-							router.push({ pathname: "add/", query: { content: "playlist" } })
-						}
-					>
-						+ Add Playlist
-					</button> */}
 				</div>
 				<div className="flex flex-wrap">
 					{isLoading && <Loader />}
 					{!isLoading &&
 						playlistResponseList.length &&
 						playlistResponseList.map((playlistData: any) => (
-							<PlaylistTile
+							<div
 								key={playlistData.id}
-								playlistId={playlistData.id}
-								playlistData={playlistData.snippet}
-							/>
+								className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
+							>
+								<PlaylistTile
+									playlistId={playlistData.id}
+									playlistData={playlistData.snippet}
+								/>
+							</div>
 						))}
 				</div>
 			</main>

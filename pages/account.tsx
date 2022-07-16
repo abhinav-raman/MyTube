@@ -99,7 +99,7 @@ const Account: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+					<h2 className="text-2xl font-bold text-black dark:text-white">
 						Account
 					</h2>
 				</div>
@@ -126,7 +126,7 @@ const Account: NextPage = () => {
 					</section>
 				)}
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+					<h2 className="text-2xl font-bold text-black dark:text-white">
 						Your Videos
 					</h2>
 					<div className="flex flex-wrap">
@@ -134,16 +134,21 @@ const Account: NextPage = () => {
 						{!isLoading &&
 							videoResponseList &&
 							videoResponseList.map((videoData: any) => (
-								<VideoTile
+								<div
 									key={videoData.id}
-									videoId={videoData.id}
-									videoData={videoData.snippet}
-								/>
+									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
+								>
+									<VideoTile
+										key={videoData.id}
+										videoId={videoData.id}
+										videoData={videoData.snippet}
+									/>
+								</div>
 							))}
 					</div>
 				</div>
 				<div className="w-full mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+					<h2 className="text-2xl font-bold text-black dark:text-white">
 						Your Playlists
 					</h2>
 					<div className="flex flex-wrap">
@@ -151,11 +156,16 @@ const Account: NextPage = () => {
 						{!isLoading &&
 							playlistResponseList &&
 							playlistResponseList.map((videoData: any) => (
-								<PlaylistTile
+								<div
 									key={videoData.id}
-									playlistId={videoData.id}
-									playlistData={videoData.snippet}
-								/>
+									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
+								>
+									<PlaylistTile
+										key={videoData.id}
+										playlistId={videoData.id}
+										playlistData={videoData.snippet}
+									/>
+								</div>
 							))}
 					</div>
 				</div>

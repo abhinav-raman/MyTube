@@ -63,7 +63,7 @@ const Home: NextPage = () => {
 				}`}
 			>
 				<div className="h-8 flex justify-between mb-4 mx-2">
-					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
+					<h2 className="text-2xl font-bold text-black dark:text-white">
 						Videos
 					</h2>
 					<PrimaryButton
@@ -94,8 +94,6 @@ const Home: NextPage = () => {
 						))}
 				</div>
 			</main>
-
-			<footer></footer>
 		</>
 	);
 };

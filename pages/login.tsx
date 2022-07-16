@@ -14,6 +14,7 @@ import BackIcon from "../assets/images/back-arrow.svg";
 import GoogleIcon from "../assets/images/google-logo.svg";
 import LoaderIcon from "../assets/images/loader.svg";
 import Loader from "../components/Loader";
+import BackArrow from "../components/ui/Navigation/BackArrow";
 
 const Login: NextPage = () => {
 	const router = useRouter();
@@ -89,16 +90,7 @@ const Login: NextPage = () => {
 				}`}
 			>
 				<div className="h-8">
-					<button
-						className="h-full aspect-square"
-						onClick={() => router.back()}
-					>
-						<BackIcon
-							alt="back"
-							layout="responsive"
-							className="hover:-translate-x-1 transition-all"
-						/>
-					</button>
+					<BackArrow />
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
 					<section className="w-96 bg-gray-100 dark:bg-gray-700 p-4 text-center rounded-lg">
