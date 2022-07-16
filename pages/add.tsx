@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { SideBarContext } from "../context/SidebarStateContext";
-import VideoTile from "../components/VideoFile";
+import VideoTile from "../components/VideoTile";
 import { useRouter } from "next/router";
 
 // import Image from "next/image";
@@ -115,32 +115,54 @@ const Create: NextPage = () => {
 				</button>
 			</div>
 			<div className="h-full pb-16 flex flex-col justify-center items-center">
-				<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
-					<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
+				<section className="w-96 bg-gray-100 dark:bg-gray-700 p-4 text-center rounded-lg">
+					<h2 className="w-full text-center mb-2 text-2xl font-bold text-black dark:text-white">
 						{CONTENT === "video" &&
 							(isVideoCreated ? "Video is added" : "Add Video")}
 						{CONTENT === "playlist" &&
 							(isVideoCreated ? "Playlist is added" : "Add Playlist")}
 					</h2>
 
+					{!isVideoCreated && verifiedContent === null && (
+						<>
+							<input
+								className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-sky-400 p-2"
+								placeholder={`${
+									CONTENT === "video" ? "Video" : "Playlist"
+								} link`}
+								type="url"
+								value={videoUrl}
+								onChange={({ target }) => setVideoUrl(target.value)}
+							/>
+							<button
+								className="rounded-md bg-sky-600 text-white hover:bg-sky-600/75 px-4 py-2"
+								type="submit"
+								onClick={verifyHandler}
+							>
+								Verify
+							</button>
+						</>
+					)}
+
 					{!isVideoCreated &&
 						verifiedContent !== null &&
 						errorInVerifyingVideo === false && (
-							<>
-								<div className="border-2 border-amber-400 mb-2 p-2 rounded-md">
-									<VideoTile
-										videoId={verifiedContent.id}
-										videoData={verifiedContent.snippet}
-									/>
-								</div>
+							<div className="w-full">
+								<VideoTile
+									videoId={verifiedContent.id}
+									videoData={verifiedContent.snippet}
+								/>
 								<p className="my-2 text-indigo-400 font-bold text-lg">
 									Is this the video you&apos;re trying to add?
 								</p>
-							</>
+							</div>
 						)}
 
 					{errorInVerifyingVideo && (
-						<p className="my-2">Cannot find the video. Please try again.</p>
+						<p className="my-2">
+							Cannot find the {CONTENT === "playlist" ? "playlist" : "video"}.
+							Please try again.
+						</p>
 					)}
 
 					{!isVideoCreated &&
@@ -148,14 +170,14 @@ const Create: NextPage = () => {
 						errorInVerifyingVideo === false && (
 							<div className="w-full flex justify-center">
 								<button
-									className="rounded-md bg-amber-400 px-4 py-2"
+									className="rounded-md bg-sky-100 border border-sky-400 px-4 py-2"
 									type="submit"
 									onClick={() => (isLoading ? null : setVerifiedContent(null))}
 								>
 									No
 								</button>
 								<button
-									className="rounded-md bg-amber-400 px-4 py-2 ml-2 relative"
+									className="rounded-md bg-sky-400 px-4 py-2 ml-2 relative"
 									type="submit"
 									onClick={() =>
 										isLoading
@@ -179,27 +201,6 @@ const Create: NextPage = () => {
 								</button>
 							</div>
 						)}
-
-					{!isVideoCreated && verifiedContent === null && (
-						<>
-							<input
-								className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-amber-400 p-2"
-								placeholder={`${
-									CONTENT === "video" ? "Video" : "Playlist"
-								} link`}
-								type="url"
-								value={videoUrl}
-								onChange={({ target }) => setVideoUrl(target.value)}
-							/>
-							<button
-								className="rounded-md bg-amber-400 px-4 py-2"
-								type="submit"
-								onClick={verifyHandler}
-							>
-								Verify
-							</button>
-						</>
-					)}
 
 					{isVideoCreated && (
 						<>

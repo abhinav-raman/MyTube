@@ -15,7 +15,7 @@ const VideoTile = ({
 	} = videoData;
 
 	return (
-		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white xl:w-[calc(25%-1rem)] md:w-[calc(33%-1rem)] sm:w-[calc(50%-1rem)] w-[calc(100%-1rem)] m-2 rounded-lg">
+		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white m-2 rounded-lg">
 			<a
 				className="cursor-pointer"
 				target="_blank"

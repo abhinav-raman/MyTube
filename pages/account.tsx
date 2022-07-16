@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import PlaylistTile from "../components/PlaylistTile";
-import VideoTile from "../components/VideoFile";
+import VideoTile from "../components/VideoTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { currentSignedInUser } from "../firebase/firebase-auth";
 import {

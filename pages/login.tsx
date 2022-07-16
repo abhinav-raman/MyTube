@@ -101,7 +101,7 @@ const Login: NextPage = () => {
 					</button>
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
-					<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
+					<section className="w-96 bg-gray-100 dark:bg-gray-700 p-4 text-center rounded-lg">
 						{/* <form onSubmit={submitHandler}>
 							<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
 								Login

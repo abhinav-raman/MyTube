@@ -4,11 +4,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-import LoaderIcon from "../assets/images/loader.svg";
-import VideoTile from "../components/VideoFile";
+import VideoTile from "../components/VideoTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getVideos } from "../firebase/firebase-database";
 import Loader from "../components/Loader";
+import { PrimaryButton } from "../components/ui/Button";
 
 const Home: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -66,9 +66,8 @@ const Home: NextPage = () => {
 					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
 						Videos
 					</h2>
-					<button
-						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
-						onClick={() =>
+					<PrimaryButton
+						onClickHandler={() =>
 							router.push({
 								pathname: "/add",
 								query: { content: "video" },
@@ -76,20 +75,22 @@ const Home: NextPage = () => {
 						}
 					>
 						+ Add Video
-					</button>
+					</PrimaryButton>
 				</div>
 				<div className="flex flex-wrap">
-					{isLoading && (
-						<Loader />
-					)}
+					{isLoading && <Loader />}
 					{!isLoading &&
 						videoResponseList &&
 						videoResponseList.map((videoData: any) => (
-							<VideoTile
+							<div
 								key={videoData.id}
-								videoId={videoData.id}
-								videoData={videoData.snippet}
-							/>
+								className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
+							>
+								<VideoTile
+									videoId={videoData.id}
+									videoData={videoData.snippet}
+								/>
+							</div>
 						))}
 				</div>
 			</main>

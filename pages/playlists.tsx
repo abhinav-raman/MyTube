@@ -5,9 +5,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import PlaylistTile from "../components/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { getPlaylists } from "../firebase/firebase-database";
-import LoaderIcon from "../assets/images/loader.svg";
 import axios from "axios";
 import Loader from "../components/Loader";
+import { PrimaryButton } from "../components/ui/Button";
 
 const Playlists: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -68,14 +68,21 @@ const Playlists: NextPage = () => {
 					<h2 className="text-2xl font-bold text-sky-800 dark:text-white">
 						Playlists
 					</h2>
-					<button
+					<PrimaryButton
+						onClickHandler={() =>
+							router.push({ pathname: "add/", query: { content: "playlist" } })
+						}
+					>
+						+ Add Playlist
+					</PrimaryButton>
+					{/* <button
 						className="h-8 px-2 rounded-md bg-sky-600 hover:bg-sky-600/75 text-white shadow-lg"
 						onClick={() =>
 							router.push({ pathname: "add/", query: { content: "playlist" } })
 						}
 					>
 						+ Add Playlist
-					</button>
+					</button> */}
 				</div>
 				<div className="flex flex-wrap">
 					{isLoading && <Loader />}

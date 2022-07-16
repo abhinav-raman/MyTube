@@ -8,6 +8,8 @@ import PlaylistIcon from "../assets/images/playlist.svg";
 import AccountIcon from "../assets/images/account.svg";
 import { useRouter } from "next/router";
 
+import { PrimaryButton } from "./ui/Button";
+
 const Sidebar = () => {
 	const router = useRouter();
 	const { isExpanded, invertIsExpanded } = useContext(SideBarContext);
@@ -17,16 +19,12 @@ const Sidebar = () => {
 				isExpanded ? "w-64" : "w-12"
 			}`}
 		>
-			<div className="flex w-full justify-end items-center mb-6">
-				<button
-					className={`w-7 h-7 text-center bg-sky-600 hover:bg-sky-600/75
-             m-2 p-1 rounded-md shadow-lg`}
-					onClick={invertIsExpanded}
-				>
+			<div className="flex w-full justify-end items-center my-3">
+				<PrimaryButton onClickHandler={invertIsExpanded} applyClasses="aspect-square">
 					<RightArrowIcon
 						className={`fill-white ${isExpanded ? "rotate-90" : "-rotate-90"}`}
 					/>
-				</button>
+				</PrimaryButton>
 			</div>
 			<ul>
 				<li>

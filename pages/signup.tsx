@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
@@ -9,10 +8,10 @@ import {
 	signUp,
 } from "../firebase/firebase-auth";
 
-import backIcon from "../assets/images/back-arrow.svg";
-import googleIcon from "../assets/images/google-logo.svg";
-import loaderIcon from "../assets/images/loader.svg";
+import BackIcon from "../assets/images/back-arrow.svg";
+import GoogleIcon from "../assets/images/google-logo.svg";
 import { LoggedInContext } from "../context/LoggedInContext";
+import Loader from "../components/Loader";
 
 const Signup = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -97,7 +96,7 @@ const Signup = () => {
 				<meta name="description" content="Login for mytube" />
 			</Head>
 			<main
-				className={`h-full flex flex-col pt-[4.5rem] p-2 transition-all ${
+				className={`h-screen flex flex-col pt-[4.5rem] p-2 transition-all ${
 					isExpanded ? "ml-64" : "ml-12"
 				}`}
 			>
@@ -106,8 +105,7 @@ const Signup = () => {
 						className="h-full aspect-square"
 						onClick={() => router.back()}
 					>
-						<Image
-							src={backIcon}
+						<BackIcon
 							alt="back"
 							layout="responsive"
 							className="hover:-translate-x-1 transition-all"
@@ -115,7 +113,7 @@ const Signup = () => {
 					</button>
 				</div>
 				<div className="h-full pb-16 flex flex-col justify-center items-center">
-					<section className="w-96 bg-amber-100 p-4 text-center rounded-lg">
+					<section className="w-96 bg-gray-100 dark:bg-gray-700 p-4 text-center rounded-lg">
 						{/* <form onSubmit={submitHandler}>
 							<h2 className="w-full text-center mb-2 text-2xl font-bold text-indigo-600">
 								Sign Up
@@ -167,8 +165,7 @@ const Signup = () => {
 							onClick={googleSignInHandler}
 						>
 							<div className="h-6 aspect-square m-auto mx-2">
-								<Image
-									src={googleIcon}
+								<GoogleIcon
 									alt="google-icon"
 									layout="fixed"
 									height="24"
@@ -176,16 +173,7 @@ const Signup = () => {
 								/>
 							</div>
 							{isLoading ? (
-								<div className="h-6 w-full">
-									<div className="h-full aspect-square m-auto">
-										<Image
-											src={loaderIcon}
-											alt="loading"
-											layout="responsive"
-											className="animate-spin-2"
-										/>
-									</div>
-								</div>
+								<Loader />
 							) : (
 								<p className="m-auto mx-2">Sign up with Google</p>
 							)}
