@@ -5,8 +5,6 @@ import { SideBarContext } from "../context/SidebarStateContext";
 import VideoTile from "../components/VideoTile";
 import { useRouter } from "next/router";
 
-// import Image from "next/image";
-import LoaderIcon from "../assets/images/loader.svg";
 import BackIcon from "../assets/images/back-arrow.svg";
 import {
 	ADD_VIDEO_TYPE,
@@ -15,6 +13,7 @@ import {
 } from "../firebase/firebase-database";
 import { currentSignedInUser } from "../firebase/firebase-auth";
 import type { User } from "firebase/auth";
+import { PrimaryButton, SecondaryButton } from "../components/ui/Button";
 
 const Create: NextPage = () => {
 	const { isExpanded } = useContext(SideBarContext);
@@ -134,13 +133,9 @@ const Create: NextPage = () => {
 								value={videoUrl}
 								onChange={({ target }) => setVideoUrl(target.value)}
 							/>
-							<button
-								className="rounded-md bg-sky-600 text-white hover:bg-sky-600/75 px-4 py-2"
-								type="submit"
-								onClick={verifyHandler}
-							>
+							<PrimaryButton onClickHandler={() => verifyHandler}>
 								Verify
-							</button>
+							</PrimaryButton>
 						</>
 					)}
 
@@ -169,17 +164,16 @@ const Create: NextPage = () => {
 						verifiedContent !== null &&
 						errorInVerifyingVideo === false && (
 							<div className="w-full flex justify-center">
-								<button
-									className="rounded-md bg-sky-100 border border-sky-400 px-4 py-2"
-									type="submit"
-									onClick={() => (isLoading ? null : setVerifiedContent(null))}
+								<SecondaryButton
+									onClickHandler={() =>
+										isLoading ? null : setVerifiedContent(null)
+									}
 								>
 									No
-								</button>
-								<button
-									className="rounded-md bg-sky-400 px-4 py-2 ml-2 relative"
-									type="submit"
-									onClick={() =>
+								</SecondaryButton>
+								<PrimaryButton
+									applyClasses="ml-2"
+									onClickHandler={() =>
 										isLoading
 											? null
 											: CONTENT === "video"
@@ -187,18 +181,8 @@ const Create: NextPage = () => {
 											: addPlaylistHandler()
 									}
 								>
-									{isLoading ? (
-										<div className="relative h-6 w-12">
-											<LoaderIcon
-												className="animate-spin-2"
-												layout="fill"
-												alt="loader"
-											/>
-										</div>
-									) : (
-										"Yes, confirm"
-									)}
-								</button>
+									Yes, confirm
+								</PrimaryButton>
 							</div>
 						)}
 

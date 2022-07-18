@@ -56,8 +56,8 @@ const Login: NextPage = () => {
 				setIsLoading(false);
 			})
 			.catch((error) => {
-				setIsLoading(false);
 				throw new Error(error.message);
+				setIsLoading(false);
 			});
 	}, [isLoggedIn, router, setIsLoggedIn]);
 
@@ -126,6 +126,7 @@ const Login: NextPage = () => {
 								Submit
 							</button>
 						</form> */}
+						{isLoading && <Loader />}
 						<button
 							className="flex rounded-md border bg-white border-slate-400 p-1 h-10 m-auto my-4"
 							onClick={googleSignInHandler}
@@ -138,11 +139,7 @@ const Login: NextPage = () => {
 									width="24"
 								/>
 							</div>
-							{isLoading ? (
-								<Loader />
-							) : (
-								<p className="m-auto mx-2">Login with Google</p>
-							)}
+							<p className="m-auto mx-2">Login with Google</p>
 						</button>
 						<p>
 							Not a user?{" "}

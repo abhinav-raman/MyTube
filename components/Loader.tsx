@@ -13,7 +13,9 @@ const Loader = () => {
 				<LoaderIcon
 					alt="loading"
 					className={`animate-spin-2 ${
-						themeContext.currentTheme === THEMES.DARK ? "fill-white" : ""
+						themeContext.currentTheme === THEMES.DARK
+							? "fill-white"
+							: "fill-black"
 					}`}
 				/>
 			</div>
