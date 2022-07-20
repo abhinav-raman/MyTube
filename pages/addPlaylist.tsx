@@ -125,7 +125,7 @@ const AddPlaylist: NextPage = () => {
 										<input
 											className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-sky-400 p-2"
 											placeholder={"Add Playlist ID"}
-											name="id"
+											name="playlist-id"
 											value={playlistUrl}
 											onChange={({ target }) => setPlaylistUrl(target.value)}
 										/>

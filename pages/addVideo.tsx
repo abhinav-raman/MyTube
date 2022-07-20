@@ -124,7 +124,7 @@ const AddVideo: NextPage = () => {
 										<input
 											className="mb-2 h-8 w-full rounded-md outline-none border-2 focus:border-sky-400 p-2"
 											placeholder={"Add Video ID"}
-											name="id"
+											name="video-id"
 											value={videoUrl}
 											onChange={({ target }) => setVideoUrl(target.value)}
 										/>
