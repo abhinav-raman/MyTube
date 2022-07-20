@@ -3,7 +3,7 @@ import SecondaryButton from "./Secondary";
 import ThemeButton from "./Theme";
 
 export type BUTTON_PROPS = {
-	onClickHandler: () => void;
+	onClickHandler: () => any;
 	children?: React.ReactNode;
   applyClasses?: string;
 };

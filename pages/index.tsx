@@ -69,8 +69,7 @@ const Home: NextPage = () => {
 					<PrimaryButton
 						onClickHandler={() =>
 							router.push({
-								pathname: "/add",
-								query: { content: "video" },
+								pathname: "/addVideo",
 							})
 						}
 					>
