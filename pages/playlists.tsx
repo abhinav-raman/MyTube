@@ -71,7 +71,7 @@ const Playlists: NextPage = () => {
 					</h2>
 					<PrimaryButton
 						onClickHandler={() =>
-							router.push({ pathname: "add/", query: { content: "playlist" } })
+							router.push({ pathname: "addPlaylist"})
 						}
 					>
 						+ Add Playlist
