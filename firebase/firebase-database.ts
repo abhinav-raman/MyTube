@@ -13,14 +13,14 @@ import {
 const database = getDatabase(firebaseApp);
 const detabaseRef = ref(getDatabase(firebaseApp));
 
-export type ADD_VIDEO_TYPE = {
+export type ADD_CONTENT_TYPE = {
 	id: string;
 	title: string;
 	dataAdded: string;
 	addedBy: { uid: string | null; email: string | null };
 };
 
-export const createVideo = (videoData: ADD_VIDEO_TYPE) =>
+export const createVideo = (videoData: ADD_CONTENT_TYPE) =>
 	set(ref(database, "videos/" + videoData.id), {
 		...videoData,
 	});
