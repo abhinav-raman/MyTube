@@ -3,15 +3,15 @@ import type { User } from "firebase/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-// import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import PlaylistTile from "../components/PlaylistTile";
-import VideoTile from "../components/VideoTile";
+import PlaylistTileUser from "../components/playlist/PlaylistTile";
+import VideoTileUser from "../components/video/VideoTileUser";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { currentSignedInUser } from "../firebase/firebase-auth";
 import {
+	deleteVideo,
 	getPlaylistByUser,
 	getVideoByUser,
 } from "../firebase/firebase-database";
@@ -73,6 +73,16 @@ const Account: NextPage = () => {
 		}
 		setIsLoading(false);
 	}, []);
+
+	const deleteVideoHandler = async (videoId: string) => {
+		try {
+			const response = await deleteVideo(videoId);
+      setVideoResponseList((prevData) => prevData.filter((video) => video.id !== videoId));
+			console.log(response, videoId);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		currentSignedInUser((user: User) => {
@@ -138,10 +148,11 @@ const Account: NextPage = () => {
 									key={videoData.id}
 									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
 								>
-									<VideoTile
+									<VideoTileUser
 										key={videoData.id}
 										videoId={videoData.id}
 										videoData={videoData.snippet}
+										deleteVideoHandler={deleteVideoHandler}
 									/>
 								</div>
 							))}
@@ -160,7 +171,7 @@ const Account: NextPage = () => {
 									key={videoData.id}
 									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
 								>
-									<PlaylistTile
+									<PlaylistTileUser
 										key={videoData.id}
 										playlistId={videoData.id}
 										playlistData={videoData.snippet}

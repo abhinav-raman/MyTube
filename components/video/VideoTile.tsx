@@ -15,14 +15,14 @@ const VideoTile = ({
 	} = videoData;
 
 	return (
-		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white m-2 rounded-lg">
+		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white m-2 rounded-lg transition-all hover:scale-105">
 			<a
 				className="cursor-pointer"
 				target="_blank"
 				rel="noreferrer"
 				href={`${YOUTUBE_VIDEO_WATCH_URL}${videoId}`}
 			>
-				<div className="relative transition-all hover:scale-105">
+				<div className="relative ">
 					<Image
 						src={medium.url}
 						alt=""

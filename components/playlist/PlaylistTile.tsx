@@ -4,7 +4,7 @@ import openIcon from "../assets/images/open-playlist.png";
 const YOUTUBE_PLAYLIST_URL = `https://www.youtube.com/playlist?list=`;
 const YOUTUBE_CHANNEL_URL = `https://www.youtube.com/channel/`;
 
-const PlaylistTile = ({
+const PlaylistTileUser = ({
 	playlistId,
 	playlistData,
 }: {
@@ -20,14 +20,14 @@ const PlaylistTile = ({
 	};
 
 	return (
-		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white m-2 rounded-lg">
+		<div className="bg-gray-100 dark:bg-gray-700 dark:text-white m-2 rounded-lg transition-all hover:scale-105">
 			<a
 				className="cursor-pointer"
 				target="_blank"
 				rel="noreferrer"
 				href={`${YOUTUBE_PLAYLIST_URL}${playlistId}`}
 			>
-				<div className="relative transition-all hover:scale-105">
+				<div className="relative">
 					<Image
 						src={medium.url}
 						alt=""
@@ -57,4 +57,4 @@ const PlaylistTile = ({
 	);
 };
 
-export default PlaylistTile;
+export default PlaylistTileUser;

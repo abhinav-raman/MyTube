@@ -1,12 +1,11 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { SideBarContext } from "../context/SidebarStateContext";
 
 import BackArrow from "../components/ui/Navigation/BackArrow";
 import { PrimaryButton, SecondaryButton } from "../components/ui/Button";
 import axios from "axios";
-import VideoTile from "../components/VideoTile";
+import VideoTile from "../components/video/VideoTile";
 import { ADD_CONTENT_TYPE, createVideo } from "../firebase/firebase-database";
 import { User } from "firebase/auth";
 import Head from "next/head";
