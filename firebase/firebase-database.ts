@@ -8,6 +8,7 @@ import {
 	query,
 	equalTo,
 	orderByChild,
+  remove,
 } from "firebase/database";
 
 const database = getDatabase(firebaseApp);
@@ -51,3 +52,5 @@ export const getPlaylistByUser = (userId: string) =>
 			equalTo(userId)
 		)
 	);
+
+export const deleteVideo = (videoId: string) => remove(child(detabaseRef, `videos/${videoId}`));
