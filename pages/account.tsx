@@ -7,8 +7,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import PlaylistTile from "../components/PlaylistTile";
-import VideoTile from "../components/VideoTile";
+import PlaylistTileUser from "../components/playlist/PlaylistTile";
+import VideoTileUser from "../components/video/VideoTileUser";
 import { SideBarContext } from "../context/SidebarStateContext";
 import { currentSignedInUser } from "../firebase/firebase-auth";
 import {
@@ -138,7 +138,7 @@ const Account: NextPage = () => {
 									key={videoData.id}
 									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
 								>
-									<VideoTile
+									<VideoTileUser
 										key={videoData.id}
 										videoId={videoData.id}
 										videoData={videoData.snippet}
@@ -160,7 +160,7 @@ const Account: NextPage = () => {
 									key={videoData.id}
 									className="xl:w-1/4 md:w-1/3 sm:w-1/2 w-full"
 								>
-									<PlaylistTile
+									<PlaylistTileUser
 										key={videoData.id}
 										playlistId={videoData.id}
 										playlistData={videoData.snippet}

@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useContext, useState } from "react";
 import { PrimaryButton, SecondaryButton } from "../components/ui/Button";
 import BackArrow from "../components/ui/Navigation/BackArrow";
-import PlaylistTile from "../components/PlaylistTile";
+import PlaylistTile from "../components/playlist/PlaylistTile";
 import { SideBarContext } from "../context/SidebarStateContext";
 import {
 	ADD_CONTENT_TYPE,
